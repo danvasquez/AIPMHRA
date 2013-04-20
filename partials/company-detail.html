@@ -1,0 +1,37 @@
+<h1>Edit <span ng-bind="company.sCompanyName"></span></h1>
+<div class="row-fluid">
+    <div class="span2 Sidebar">
+        <button class="btn-primary btn-large" ng-click="SaveCompany(company)">Save Company</button>
+        <button class="btn btn-danger" ng-click="DeleteCompany(company)">Delete Company</button>
+
+    </div>
+    <div class="span10 offset2">
+        <div class="control-group">
+            <label class="control-label">Company Name:</label>
+            <div class="controls">
+                <input type="text" ng-model="company.sCompanyName"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Code:</label>
+            <div class="controls">
+                <input type="text" ng-model="company.sCode"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label>Current Logo: <img ng-src="{{company.urlCompanyLogo}}" style="max-height: 200px;max-width: 300px"/></label>
+        </div>
+
+        <form ng-show="company.idCompanyID != '0'" METHOD="POST" action="./php/LogoUpload.php" id="frmUploadLogo" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Upload New Logo</legend>
+                <input type="hidden" id="idCompanyID" name="idCompanyID" value="{{company.idCompanyID}}"/>
+                <input type="file" id="UploadedLogo" name="UploadedLogo">
+                <button class="btn" type="submit">Upload</button>
+            </fieldset>
+        </form>
+        <legend ng-show="company.idCompanyID=='0'">Save Company first to enable logo upload</legend>
+    </div>
+</div>

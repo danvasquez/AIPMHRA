@@ -1,0 +1,28 @@
+<h1>Welcome</h1>
+
+<form class="row-fluid form-horizontal" ng-submit="Login()">
+    <legend>Please Login Below <sub>Or <a href='./#/register'>register here</a></sub></legend>
+
+    <div class="control-group">
+        <label class="control-label">User ID:</label>
+        <div class="controls">
+            <input type="email" ng-model="LogInUserID" required/>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Password:</label>
+        <div class="controls">
+            <input type="password" ng-model="LogInUserPWD" required/>
+        </div>
+    </div>
+
+    <span class="text-error" ng-bind="ErrorMessage"></span>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn-primary btn-large" type="submit">Go</button>
+        </div>
+    </div>
+
+</form>

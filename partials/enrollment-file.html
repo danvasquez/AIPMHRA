@@ -1,0 +1,79 @@
+<h1>Check Enrollment File</h1>
+
+<div class="row-fluid">
+    <div class="span12">
+        <ol>
+            <li>Step 1: Choose a plain text Comma Seperated Value (.CSV) file to check.</li>
+            <li>Step 2: Choose a company to check against.</li>
+            <li>Step 3: Choose the column in your CSV file to check against. We'll use this to look for corresponding National ID numbers in the Database.</li>
+        </ol>
+    </div>
+</div>
+<div class="row-fluid">
+
+    <div class="span12">
+        <form class="form-inline" ng-submit="CheckUsers()" name="uploadForm" enctype="multipart/form-data" method="POST">
+            <label class="label">
+                <i class="icon-file"></i>File:
+                <input type="file" id="file" name="file" required />
+
+            </label>
+            <label class="label">
+                Company:
+                <select
+                        name="CompanyID"
+                        ng-model="CompanyID"
+                        ng-options="xcompany.idCompanyID as xcompany.sCompanyName for xcompany in $root.companyList"
+                        required
+                        >
+                </select>
+            </label>
+            <label>
+                National ID Column #:
+                <input type="number" class="input-mini" ng-model="NationalIDCol" required />
+            </label>
+            <button type="submit" class="btn">Check File</button>
+        </form>
+    </div>
+
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <span class="text-error" ng-bind="ErrorMessage"></span>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th ng-repeat="hcell in FileHeaders"># {{$index}}</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in FileContents|limitTo:10">
+                <td ng-repeat="cell in row">{{cell}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="span6">
+        <legend>Registered Users</legend>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>UserID</th>
+                    <th>NationalID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in FoundUsers">
+                    <td>{{user.sFullName}}</td>
+                    <td>{{user.sUserID}}</td>
+                    <td>{{user.sNationalID}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

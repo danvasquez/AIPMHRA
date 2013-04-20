@@ -1,0 +1,68 @@
+<h1>Register New User</h1>
+<div class="row-fluid">
+
+    <div class="span12">
+
+
+        <form class="row form-horizontal" ng-submit="SaveUser(user)">
+            <div class="control-group">
+                <label class="control-label">User Name:</label>
+                <div class="controls">
+                    <input type="text" ng-model="user.sFullName" required/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">User ID:</label>
+                <div class="controls">
+                    <input type="email" ng-model="user.sUserID" required />
+                    <div class="input-help">
+                        <h4>Invalid Email</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">National ID:</label>
+                <div class="controls">
+                    <input type="text" ng-model="user.sNationalID"/>
+                </div>
+            </div>
+
+            <div class="control-group" ng-show="!LoggedInUser">
+                <label class="control-label">Company Code:</label>
+                <div class="controls">
+                    <input type="text" ng-model="sCompanyCode"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">User Type:</label>
+                <div class="controls">
+                    <select  ng-model="user.iRole" required>
+                        <option ng-selected value="3">User</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Password:</label>
+                <div class="controls">
+                    <input type="password" ng-model="NewPassword" class="immediate-help" password-validate required />
+                    <div class="input-help">
+                        <h4>Password must meet the following requirements:</h4>
+                        <ul>
+                            <li ng-class="pwdHasLetter">At least <strong>one letter</strong></li>
+                            <li ng-class="pwdHasNumber">At least <strong>one number</strong></li>
+                            <li ng-class="pwdValidLength">At least <strong>8 characters long</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+                <strong ng-bind="ErrorMessage" class="text-error"></strong>
+            <button class="btn-primary btn-large" type="submit">Save</button>
+        </form>
+    </div>
+</div>

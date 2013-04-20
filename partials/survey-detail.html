@@ -1,0 +1,190 @@
+<h1>Edit Survey</h1>
+        <div class="row-fluid">
+            <div class="span12 EditSurveyMainInfo">
+                <p>
+                    <span>Survey Title: <textarea ng-model="survey.sTitle" ></textarea></span>
+                    <span>Spanish Title: <textarea ng-model="survey.sTitleSpanish"></textarea></span>
+                </p>
+                <p>
+                    <span>Survey Preamble: <textarea ng-model="survey.sPreamble" ></textarea></span>
+                    <span>Spanish Preamble: <textarea ng-model="survey.sPreambleSpanish"></textarea></span>
+                </p>
+
+                <button ng-show="survey.sStatus!='Active'" class="btn btn-danger" ng-click="survey.sStatus='Active'"><i class="icon-exclamation-sign"></i>Survey Is Inactive<br><sub>click to make active</sub></button>
+                <button ng-show="survey.sStatus=='Active'" class="btn btn-success" ng-click="survey.sStatus='Inactive'"><i class="icon-check"></i>Survey Is Active<br><sub>click to make inactive</sub></button>
+            </div>
+        </div>
+<div class="row-fluid">
+    <div class="span2 Sidebar">
+        <button class="btn-primary btn-large" ng-click="SaveSurvey(survey)">Save Survey</button>
+        <button class="btn-info" ng-click="AddNewQuestion()">Add New Question</button>
+        <button class="btn-warning" ng-click="QuestionReorder()">Reorder Questions</button>
+        <button class="btn btn-danger" ng-click="DeleteSurvey(survey)">Delete Survey</button>
+
+    </div>
+    <div class="span8 offset2">
+        <div class="accordion" id="QuestionAccordion">
+            <div ng-repeat="question in survey.qcQuestions | orderBy:question.iQuestionOrder" class="accordion-group">
+                <div class="accordion-heading">
+                    <span><i ng-click="QuestionOrderUp(question)" class="icon-arrow-up"></i><em ng-bind="question.iQuestionOrder"></em><i ng-click="QuestionOrderDown(question)" class="icon-arrow-down"></i></span>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="QuestionAccordion"  href="#collapse{{question.idQuestionID}}" ng-bind="question.sText"></a>
+                </div>
+                <div id="collapse{{question.idQuestionID}}" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        <div class="row-fluid well well-small">
+                            <div class="span3 offset1">
+                                <div class="control-group">
+                                    <label class="control-label">Question Type</label>
+                                    <div class="controls">
+                                        <select
+                                                ng-model="question.sQuestionType"
+                                                ng-options="qTypes.value as qTypes.text for qTypes in QuestionTypes"
+                                                >
+                                            <option>--</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="row-fluid">
+                            <div class="span5 offset1">
+                                <strong>English</strong>
+                            </div>
+                            <div class="span5">
+                                <strong>Spanish</strong>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="row-fluid well well-small">
+                            <div class="span5 offset1">
+                                <div class="control-group">
+                                    <label class="control-label">Preamble:</label>
+                                    <div class="controls">
+                                        <textarea ng-model="question.sPreamble"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span5">
+                                <div class="control-group">
+                                    <label class="control-label">Preámbulo:</label>
+                                    <div class="controls">
+                                        <textarea ng-model="question.sPreambleSpanish"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="row-fluid well well-small">
+                            <div class="span5 offset1">
+
+                                <div class="control-group">
+                                    <label class="control-label">Text</label>
+                                    <div class="controls">
+                                        <textarea type="text" ng-model="question.sText"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span5">
+
+                                <div class="control-group">
+                                    <label class="control-label">Texto</label>
+                                    <div class="controls">
+                                        <textarea type="text" ng-model="question.sTextSpanish"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="row-fluid">
+                            <div class="span5 offset1">
+                                <em>Answers</em>
+                            </div>
+                            <div class="span5">
+                                <em>Respuestas</em>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <ol>
+                                    <li ng-repeat="answer in question.aAnswers">
+                                        <div class="row-fluid well well-small">
+                                            <div class="span5 offset1">
+                                                <div class="control-group">
+                                                    <label class="control-label">Text:</label>
+
+                                                    <div class="controls">
+                                                        <input type="text" ng-model="answer.sAnswerText" />
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label>Risk Factor:</label>
+                                                    <div class="controls">
+                                                        <textarea ng-model="answer.sRiskFactorText"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Triggers / Disparadores:</label>
+                                                    <div class="controls">
+                                                        <select
+                                                                ng-model="answer.idTriggers"
+                                                                ng-options="xquestion.idQuestionID as xquestion.sText for xquestion in survey.qcQuestions"
+                                                                ng-change="updateTriggerQuestion({{xquestion}})">
+                                                            <option>--</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span5">
+                                                <div class="control-group">
+                                                    <label class="control-label">Texto:</label>
+
+                                                    <div class="controls">
+                                                        <input type="text" ng-model="answer.sAnswerTextSpanish" />
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label>Factores de Riesgo:</label>
+                                                    <div class="controls">
+                                                        <textarea ng-model="answer.sRiskFactorTextSpanish"></textarea>
+                                                    </div>
+                                                </div>
+                                                <button class="btn-danger btn-mini" ng-click="DeleteAnswer(answer,question)">Delete Answer</button>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <button class="btn-info btn-mini" ng-click="AddNewAnswer(question)">Add New Answer</button>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+
+                        <button class="btn-danger" ng-click="DeleteQuestion(question)">Delete Question</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+

@@ -1,0 +1,56 @@
+<h1>{{results.survey.sTitle}}</h1>
+<h2>Results for {{results.survey.sCompanyName}}</h2>
+
+<div class="row-fluid">
+    <div class="span12 AdminSurveyResults">
+
+        <div class="row-fluid">
+            <div class="span12">
+                <span class="ResultsUserStats">Users who are eligible: {{results.usersAvailable.List.length}}</span>
+                <span class="ResultsUserStats">Users who have begun survey: {{results.usersAttempted.length}}</span>
+                <span class="ResultsUserStats">Users who have completed survey: {{results.usersCompleted.length}}</span>
+            </div>
+        </div>
+
+        <div class="row-fluid well well-small" ng-repeat="question in results.survey.qcQuestions">
+            <div class="span4 ResultsQuestionText">{{question.sText}}</div>
+            <div class="span4 white">
+                <div ng-show="question.sQuestionType=='option'">
+                    <table class="table table-striped">
+
+                        <thead>
+                            <tr>
+                                <th>Answer</th>
+                                <th>Responses</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="answer in question.aAnswers">
+                                <td>{{answer.sAnswerText}}</td>
+                                <td>{{answer.iUsersAnswered}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-show="question.sQuestionType=='Textbox'">
+                    Text
+                </div>
+            </div>
+            <div class="span4 white">
+                <div style="width: 100%" ng-show="question.sQuestionType=='option'" ng-model="question.resultsStats"
+                     qn:columns="[{type:'string', name: 'Answer'},{type:'number', name: 'Responses'}]"
+                     qn:piechart="{
+                legend : {alignment: 'center'},
+                chartArea: {height: 400},
+                backgroundColor: '#FFF'}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+
+
+
+
