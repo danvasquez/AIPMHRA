@@ -1,16 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: danvasquez
- * Date: 2/8/13
- * Time: 7:03 PM
- * To change this template use File | Settings | File Templates.
- */
-$loggedin=true;
-if(!$loggedin){
-    header('HTTP/1.0 401 Unauthorized');
-    exit;
-}
 
 foreach (glob("classes/*.php") as $filename)
 {

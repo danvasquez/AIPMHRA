@@ -8,7 +8,7 @@
  */
 
 
-require_once('./Classes/SQLConnection.php');
+require_once('./classes/SQLConnection.php');
 
 class SQLConnectionTest extends \PHPUnit_Framework_TestCase {
 

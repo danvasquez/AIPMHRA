@@ -6,7 +6,6 @@
  * Time: 9:25 PM
  * To change this template use File | Settings | File Templates.
  */
-namespace FacilityPro;
 
 class SQLConnection
 {
@@ -20,26 +19,26 @@ class SQLConnection
 
     public function DoSelectQuery($_sqlQuery,array $_params = null){
         $this->sqlConnection = $this->MakeSQLConnection();
-        $query = $this->sqlConnection->prepare($_sqlQuery,array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+        $query = $this->sqlConnection->prepare($_sqlQuery,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         $results = array();
         try{
             if($query->execute($_params)){
-                while($row = $query->fetch(\PDO::FETCH_ASSOC)){
+                while($row = $query->fetch(PDO::FETCH_ASSOC)){
                     $results[]=$row;
                 }
             }
 
             $this->sqlConnection = null;
             return $results;
-        } catch (\PDOException $e){
-            throw new \Exception("SQLConnection'\DoSelectQuery Failed:".$e->getMessage);
+        } catch (PDOException $e){
+            throw new Exception("SQLConnection'\DoSelectQuery Failed:".$e->getMessage());
         }
 
     }
 
    public function DoDeleteQuery($_query,$_params){
        $this->sqlConnection = $this->MakeSQLConnection();
-       $query = $this->sqlConnection->prepare($_query,array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+       $query = $this->sqlConnection->prepare($_query,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
        try{
            if($query->execute($_params)){
                $this->sqlConnection = null;
@@ -48,14 +47,14 @@ class SQLConnection
                $this->sqlConnection = null;
                return false;
            }
-       } catch (\PDOException $e){
+       } catch (PDOException $e){
             throw new \Exception($e->getMessage());
        }
    }
 
     public function DoInsertQuery($_query,$_params){
         $this->sqlConnection = $this->MakeSQLConnection();
-        $query = $this->sqlConnection->prepare($_query,array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+        $query = $this->sqlConnection->prepare($_query,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         $results = null;
         try{
             if($query->execute($_params)){
@@ -68,7 +67,7 @@ class SQLConnection
                 $results = "0";
                 $this->sqlConnection = null;
             }
-        } catch (\PDOException $e){
+        } catch (PDOException $e){
             throw new \Exception($e->getMessage());
         }
 
@@ -77,7 +76,7 @@ class SQLConnection
 
     public function DoUpdateQuery($_query,$_params){
         $this->sqlConnection = $this->MakeSQLConnection();
-        $query = $this->sqlConnection->prepare($_query,array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+        $query = $this->sqlConnection->prepare($_query,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         try{
             if($query->execute($_params)){
@@ -88,16 +87,16 @@ class SQLConnection
 
                 return false;
             }
-        } catch (\PDOException $e){
+        } catch (PDOException $e){
             throw new \Exception($e->getMessage());
         }
     }
     private function MakeSQLConnection(){
         try {
 
-            //$dbh = new \PDO('mysql:host=mysql501.hostexcellence.com;dbname=dvasque_temple', 'dvasque_temple', 'T3mple');
-            $dbh = new \PDO('mysql:host=localhost;dbname=facilitypro', $this->user, $this->pass);
-            $dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            //$dbh = new PDO('mysql:host=mysql501.hostexcellence.com;dbname=dvasque_temple', 'dvasque_temple', 'T3mple');
+            $dbh = new PDO('mysql:host=localhost;dbname=aipmsurveys', $this->user, $this->pass);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $dbh;
         } catch (PDOException $e) {
             throw new \Exception($e->getMessage());
