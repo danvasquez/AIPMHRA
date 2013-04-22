@@ -6,11 +6,6 @@
  * Time: 8:24 PM
  * To change this template use File | Settings | File Templates.
  */
-<<<<<<< HEAD
-class Question
-{
-
-=======
 
 foreach (glob("classes/*.php") as $filename)
 {
@@ -249,5 +244,4 @@ class Question
     public function ToJSON(){
         echo json_encode($this);
     }
->>>>>>> initial commit
 }

@@ -6,12 +6,6 @@
  * Time: 7:31 PM
  * To change this template use File | Settings | File Templates.
  */
-<<<<<<< HEAD
-class SurveyCollection
-{
-
-}
-=======
 foreach (glob("classes/*.php") as $filename)
 {
     require_once($filename);
@@ -42,6 +36,7 @@ class SurveyCollection
     public function GetAllSurveys(){
         $sql = new SQLConnection();
         $result = $sql->DoSelectQuery("SELECT id FROM surveys");
+        $_language = ""; //TODO clean this up
         foreach ($result as $row){
             $this->List[] = new Survey($row['id'],$_language);
         }
@@ -52,4 +47,4 @@ class SurveyCollection
 
 }
 ?>
->>>>>>> initial commit
+

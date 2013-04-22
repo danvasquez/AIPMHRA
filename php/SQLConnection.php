@@ -96,7 +96,7 @@ class SQLConnection
         try {
 
             //$dbh = new \PDO('mysql:host=mysql501.hostexcellence.com;dbname=dvasque_temple', 'dvasque_temple', 'T3mple');
-            $dbh = new \PDO('mysql:host=localhost;dbname=facilitypro', $this->user, $this->pass);
+            $dbh = new \PDO('mysql:host=localhost;dbname=aipmsurveys', $this->user, $this->pass);
             $dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             return $dbh;
         } catch (PDOException $e) {
