@@ -34,5 +34,5 @@ $oldCompany = new Company($updatedCompanyData->idCompanyID);
 
 $oldCompany->sCode = $updatedCompanyData->sCode;
 $oldCompany->sCompanyName = $updatedCompanyData->sCompanyName;
-
+$oldCompany->txtHometext = $updatedCompanyData->txtHometext;
 echo $oldCompany->SaveCompany();

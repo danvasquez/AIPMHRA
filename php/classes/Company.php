@@ -16,6 +16,7 @@ class Company
     public $sCompanyName = "";
     public $sCode="";
     public $urlCompanyLogo="";
+    public $txtHometext="";
 
     function Company($_companyID=0){
         $this->idCompanyID = $_companyID;
@@ -31,6 +32,7 @@ class Company
             $this->sCompanyName = $row['name'];
             $this->sCode = $row['code'];
             $this->urlCompanyLogo = $row['companylogo'];
+            $this->txtHometext = $row['hometext'];
         }
     }
 
@@ -42,6 +44,7 @@ class Company
             $this->idCompanyID = $row['id'];
             $this->sCode = $row['code'];
             $this->urlCompanyLogo = $row['companylogo'];
+            $this->txtHometext = $row['hometext'];
         }
     }
 
@@ -59,12 +62,12 @@ class Company
         }
 
         if(!$bIsNewCompany){
-            $companyQuery = "UPDATE companies SET name=:name,code=:code,companylogo=:companylogo WHERE id=".$this->idCompanyID;
+            $companyQuery = "UPDATE companies SET name=:name,code=:code,companylogo=:companylogo,hometext=:hometext WHERE id=".$this->idCompanyID;
         }else{
-            $companyQuery = "INSERT companies (name,code,companylogo) VALUES (:name,:code,:companylogo)";
+            $companyQuery = "INSERT companies (name,code,companylogo,hometext) VALUES (:name,:code,:companylogo,:hometext)";
         }
 
-        $companyParams = array(':name'=>$this->sCompanyName,':code'=>$this->sCode,':companylogo'=>$this->urlCompanyLogo);
+        $companyParams = array(':name'=>$this->sCompanyName,':code'=>$this->sCode,':companylogo'=>$this->urlCompanyLogo,':hometext'=>$this->txtHometext);
         $sql = new SQLConnection();
 
         if($bIsNewCompany){

@@ -17,6 +17,7 @@ class User
     public $sCompanyName = "";
     public $sUserID="";
     public $urlCompanyLogo="";
+    public $txtHometext = "";
     public $pPassword="";
     public $sFullName="";
     public $iRole = 3;
@@ -55,6 +56,7 @@ class User
         foreach($result as $row){
             $this->sCompanyName = $row['name'];
             $this->urlCompanyLogo = $row['companylogo'];
+            $this->txtHometext = $row['hometext'];
         }
     }
     public function CheckIDExists($_sUserID){

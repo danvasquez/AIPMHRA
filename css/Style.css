@@ -1,5 +1,6 @@
 body{
     padding-top: 40px; /*because of fixed top navbar */
+    background-color: #353634;
 }
 li{
     list-style-type: none;
@@ -8,12 +9,16 @@ li{
 h1{
     font-size: 20px!important;
 }
-
+.navbar{
+    font-size:20px !important;
+}
 .nav-textOnly{
-    color: #ffffff;
-    height: 40px;
-    line-height: 40px;
+    height: 80px;
+    line-height: 80px;
     vertical-align: middle;
+    font-weight: 300;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 26px;
 }
 .EditSurveyMainInfo{
     text-align: center;
@@ -21,8 +26,18 @@ h1{
 span{
     font-weight: bold;
 }
+.footer{
+    -moz-border-radius-bottomleft: 15px;
+    -moz-border-radius-bottomright: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+   background-color: #ebe5ea;
+   text-align: center;
+    border-bottom: 1px solid black;
+    border-top:1px solid black;
+}
 .Sidebar{
-    position: fixed;
+    /*position: fixed;*/
     text-align: center;
 }
 
@@ -31,9 +46,27 @@ span{
 }
 
 .Content{
-    margin-left: 16.167% !important;
+   /* margin-left: 16.167% !important; */
 }
 
+.loginh1{
+    font-size: 44px!important;
+    font-weight: 300;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.container{
+    margin-top:40px;
+    background-color: #ffffff;
+
+    -moz-border-radius-bottomleft: 15px;
+    -moz-border-radius-bottomright: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    border-left:1px solid #000000;
+    border-right:1px solid #000000;
+}
 button{
     margin: 5px !important;
 }
@@ -67,7 +100,8 @@ th{
     display:inline;
 }
 .nav-list{
-    text-align: right;
+    /* text-align: right; */
+    text-align: left;
 }
 .nav-header{
     text-align: center;

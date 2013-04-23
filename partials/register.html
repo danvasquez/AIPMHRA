@@ -1,8 +1,6 @@
-<h1>Register New User</h1>
-<div class="row-fluid">
-
-    <div class="span12">
-
+<div class="row">
+    <div class="span8 offset2">
+        <h1>Register New User</h1>
 
         <form class="row form-horizontal" ng-submit="SaveUser(user)">
             <div class="control-group">
@@ -61,8 +59,11 @@
                 </div>
             </div>
 
-                <strong ng-bind="ErrorMessage" class="text-error"></strong>
+            <strong ng-bind="ErrorMessage" class="text-error"></strong>
             <button class="btn-primary btn-large" type="submit">Save</button>
         </form>
+
+
     </div>
 </div>
+

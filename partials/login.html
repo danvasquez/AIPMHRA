@@ -1,28 +1,38 @@
-<h1>Welcome</h1>
-
-<form class="row-fluid form-horizontal" ng-submit="Login()">
-    <legend>Please Login Below <sub>Or <a href='./#/register'>register here</a></sub></legend>
-
-    <div class="control-group">
-        <label class="control-label">User ID:</label>
-        <div class="controls">
-            <input type="email" ng-model="LogInUserID" required/>
-        </div>
+<div class="row">
+    <div class="span8 offset2 text-center">
+        <h1 class="loginh1">Welcome</h1>
     </div>
+</div>
 
-    <div class="control-group">
-        <label class="control-label">Password:</label>
-        <div class="controls">
-            <input type="password" ng-model="LogInUserPWD" required/>
+<div class="row">
+    <form class="span8 offset2 form-horizontal" ng-submit="Login()">
+
+        <legend>Please Login Below</legend>
+
+        <div class="control-group">
+            <label class="control-label">User ID:</label>
+            <div class="controls">
+                <input type="email" ng-model="LogInUserID" required/>
+            </div>
         </div>
-    </div>
 
-    <span class="text-error" ng-bind="ErrorMessage"></span>
-
-    <div class="control-group">
-        <div class="controls">
-            <button class="btn-primary btn-large" type="submit">Go</button>
+        <div class="control-group">
+            <label class="control-label">Password:</label>
+            <div class="controls">
+                <input type="password" ng-model="LogInUserPWD" required/>
+            </div>
         </div>
-    </div>
 
-</form>
+        <span class="text-error" ng-bind="ErrorMessage"></span>
+
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn-primary btn-large" type="submit">Login</button>
+            </div>
+        </div>
+
+        <p>
+            Or <a href='./#/register'>register here</a>
+        </p>
+    </form>
+</div>

@@ -1,18 +1,20 @@
-<h1>Companies</h1>
-<a href="./#/company/0" class="btn btn-inverse btn-large">Add New Company</a>
-<table class="table table-striped table-hover companyTable">
-    <thead>
+<div class="span10">
+    <h1>Companies</h1>
+    <a href="./#/company/0" class="btn btn-inverse btn-large">Add New Company</a>
+    <table class="table table-striped table-hover companyTable">
+        <thead>
         <tr>
             <th>Code</th>
             <th>Name</th>
             <th>Logo</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <tr ng-repeat="company in companies" ng-click="GetCompanyDetails(company.idCompanyID)">
             <td>{{company.sCode}}</td>
             <td>{{company.sCompanyName}}</td>
             <td><img ng-src="{{company.urlCompanyLogo}}" /></td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
