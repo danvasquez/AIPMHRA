@@ -60,7 +60,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="survey in surveys | orderBy:orderprop | filter:{iCompany : $root.companyFilter}" ng-click="GetSurveyDetails(survey.idSurveyID)" name='SurveyRow_{{survey.idSurveyID}}'>
+                <tr ng-repeat="survey in surveys | orderBy:orderprop | filter:{iCompany : $root.companyFilter}" ng-click="GetSurveyDetails(survey.idSurveyID)" name='SurveyRow_{{survey.idSurveyID}}' class="surveyTableTR">
 
                     <td>{{survey.sCompanyName}}</td>
                     <td>{{survey.sTitle}}</td>

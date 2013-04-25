@@ -1,7 +1,7 @@
 <div class="row">
     <div class="span10">
         <h1>Surveys</h1>
-        <table id="tblSurveyTable" class="table table-striped table-hover">
+        <table id="tblSurveyTable" class="table table-striped table-hover userSurveyTable">
             <thead>
             <tr>
 
@@ -11,7 +11,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="survey in surveys" ng-click="TakeSurvey(survey.idSurveyID)" name='SurveyRow_{{survey.idSurveyID}}'>
+            <tr ng-repeat="survey in surveys" ng-click="TakeSurvey(survey.idSurveyID)" class="surveyTableTR" name='SurveyRow_{{survey.idSurveyID}}'>
 
                 <td>{{survey.sTitle}}</td>
 

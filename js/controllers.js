@@ -456,8 +456,12 @@ function UserSurveyCtrl($scope,$http){
 }
 function HomeCtrl($scope,$http){
     $scope.$root.CheckLogin(3);
-
+    //console.log($scope.$root.LoggedInUser.txtHometext);
+    $scope.homeHTML = unescape($scope.$root.LoggedInUser.txtHometext);
+    console.log($scope.homeHTML);
     console.log("Home Now");
+
+    $scope.$apply();
 }
 function LoginCtrl($scope,$http,$cookies){
     console.log("loginCtrl Loaded");
@@ -556,6 +560,54 @@ function SurveyEditCtrl($scope,$routeParams,$http){
     $scope.activeQuestion = 0;
     $scope.ActiveTriggerQuestion = null;
     $scope.ActiveLanguage = "ENGLISH";
+
+    $scope.divCopySurvey = false
+//BOOKMARK
+
+    $scope.GetSurveysToCopy = function(){
+        var Criteria = "companyID";
+        if($scope.$root.LoggedInUser.iRole==1){Criteria="allSurveys"}
+        $http.post($scope.url, { "criteria":Criteria,"iRole":$scope.$root.LoggedInUser.iRole,"idCompanyID":$scope.$root.LoggedInUser.idCompanyID}).
+            success(function(data, status) {
+                $scope.status = status;
+                $scope.data = data;
+                console.log(data);
+                data.pop();
+                $scope.copysurveys = data;
+            })
+            .
+            error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+            });
+    }
+
+    $scope.ShowCopySurvey = function(){
+
+        if($scope.divCopySurvey==true){
+            $scope.divCopySurvey = false;
+        }else{
+            $scope.divCopySurvey = true;
+            $scope.GetSurveysToCopy();
+        }
+
+    }
+
+    $scope.copySurvey = function($copySurveyID){
+
+        $http.post($scope.url, { "criteria":"CopySurvey","data" : $copySurveyID,"newID": $scope.surveyID,"language":"ALL"}).
+            success(function(data, status) {
+                $scope.status = status;
+                $scope.data = data;
+                $scope.survey = data;
+                $scope.apply();
+            })
+            .
+            error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+            });
+    }
 
     $http.post($scope.url, { "criteria":"surveyID","data" : $scope.surveyID,"language":"ALL"}).
         success(function(data, status) {

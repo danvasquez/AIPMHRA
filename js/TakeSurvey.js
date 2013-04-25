@@ -29,6 +29,20 @@ function UserResultsCtrl($scope,$routeParams,$http){
     if($routeParams.surveyID != null){
         TheSurveyID = $routeParams.surveyID;
     }
+
+    $scope.DownloadPDF = function(){
+        var fileString = document.documentElement.outerHTML;
+        var fileName = "U"+$scope.$root.LoggedInUser.idUserID+"S"+TheSurveyID+"_Results.pdf"
+        $http.post("./php/PDFController.php",{"fileString":fileString,"fileName":fileName}).
+            success(function(data,status){
+                console.log("SUCCESS");
+                window.open("./php/"+data);
+            })
+            .error(function(data,status){
+            console.log('NO RESPONSE');
+        });
+    }
+
     $scope.GetResults = function(){
         if(TheSurveyID >0){
             $scope.url = "./php/SurveyController.php";

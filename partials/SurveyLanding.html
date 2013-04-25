@@ -1,7 +1,7 @@
 <h1>{{survey.sTitle}}</h1>
 
         <div class="row-fluid">
-            <div class="span4 offset4 well text-center" ng-show="SurveyFinished==true">
+            <div class="span4 offset4 well text-center FinishedBanner" ng-show="SurveyFinished==true">
                 <h3>Completed!</h3>
                 <a href="./#/ViewResults/{{survey.idSurveyID}}">View Results</a>
             </div>
@@ -17,14 +17,16 @@
 
         <div class="row-fluid">
 
-            <div class="span6">
+            <div class="span4 offset1">
                 <p>{{survey.sPreamble}}</p>
-                <button class="btn" ng-click="StartSurvey()">Take Survey</button>
+                <button class="btn" ng-click="StartSurvey()">Take Survey in English</button>
             </div>
-            <div class="span6">
+            <div class="span4">
                 <p>{{survey.sPreambleSpanish}}</p>
-                <button class="btn" ng-click="StartSurvey('SPANISH')">Tomar la encuesta</button>
+                <button class="btn" ng-click="StartSurvey('SPANISH')">Tomar la Encuesta en Español</button>
             </div>
+
+            <div class="clearfix"></div>
         </div>
 
 

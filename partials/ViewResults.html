@@ -1,8 +1,9 @@
 <div class="row">
-    <div class="span10">
+    <div class="span10 UserSurveyResults">
         <h1>{{survey.sTitle}}</h1>
         <h2>Results for {{LoggedInUser.sFullName}}</h2>
-        <div class='languageOption' ng-click="ChangeLanguage('ENGLISH')">In English</div><div class='languageOption' ng-click="ChangeLanguage('SPANISH')">En Espagnol</div>
+        <div class='languageOption' ng-click="ChangeLanguage('ENGLISH')">In English</div><div class='languageOption' ng-click="ChangeLanguage('SPANISH')">En Español</div>
+        <div class='languageOption'><button class="btn" ng-click="DownloadPDF()">Download PDF</button></div>
     </div>
 </div>
 <div class="row">

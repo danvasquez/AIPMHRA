@@ -88,7 +88,7 @@ class Survey
     public function Delete(){
         if($this->idSurveyID>0){
             $sql = new SQLConnection();
-            return $sql->DoDeleteQuery("DELETE FROM SURVEYS WHERE id=:id",array("id"=>$this->idSurveyID));
+            return $sql->DoDeleteQuery("DELETE FROM surveys WHERE id=:id",array("id"=>$this->idSurveyID));
         }else{return false;}
     }
 

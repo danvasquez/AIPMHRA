@@ -55,67 +55,72 @@ $existingSurveyData->qcQuestions = $updatedSurveyData->qcQuestions;
 
 $iResult = $existingSurveyData->SaveSurvey(); //going to get back either 0 for update failed, 1 for update succeeded, or the new id
 
-if($iResult>1){   //means it's a new survey that was just inserted
-    foreach($updatedSurveyData->qcQuestions as $question){
-        //questions
-        $tempQuestion = new Question($question->idQuestionID,"ALL");
-        $tempQuestion->idSurvey = $iResult;
-        $tempQuestion->iQuestionOrder = $question->iQuestionOrder;
-        $tempQuestion->sPreamble = $question->sPreamble;
-        $tempQuestion->sPreambleSpanish = $question->sPreambleSpanish;
-        $tempQuestion->sQuestionType = $question->sQuestionType;
-        $tempQuestion->sText = $question->sText;
-        $tempQuestion->sTextSpanish = $question->sTextSpanish;
-        $iNewQuestionID = $tempQuestion->SaveQuestion();
+try{
+    if($iResult>1){   //means it's a new survey that was just inserted
+        foreach($updatedSurveyData->qcQuestions as $question){
+            //questions
+            $tempQuestion = new Question($question->idQuestionID,"ALL");
+            $tempQuestion->idSurvey = $iResult;
+            $tempQuestion->iQuestionOrder = $question->iQuestionOrder;
+            $tempQuestion->sPreamble = $question->sPreamble;
+            $tempQuestion->sPreambleSpanish = $question->sPreambleSpanish;
+            $tempQuestion->sQuestionType = $question->sQuestionType;
+            $tempQuestion->sText = $question->sText;
+            $tempQuestion->sTextSpanish = $question->sTextSpanish;
+            $iNewQuestionID = $tempQuestion->SaveQuestion();
 
-        //answers
-        foreach($question->aAnswers as $answer){
-            $tempAnswer = new Answer($answer->idAnswerID);
-            $tempAnswer->idSurveyID = $iResult;
-            $tempAnswer->idQuestionID = $iNewQuestionID;
-            $tempAnswer->iOrder = $answer->iOrder;
-            $tempAnswer->idTriggers = $answer->idTriggers;
-            $tempAnswer->sAnswerText = $answer->sAnswerText;
-            $tempAnswer->sAnswerTextSpanish = $answer->sAnswerTextSpanish;
-            $tempAnswer->sRiskFactorText = $answer->sRiskFactorText;
-            $tempAnswer->sRiskFactorTextSpanish = $answer->sRiskFactorTextSpanish;
-            $tempAnswer->SaveAnswer();
+            //answers
+            foreach($question->aAnswers as $answer){
+                $tempAnswer = new Answer($answer->idAnswerID);
+                $tempAnswer->idSurveyID = $iResult;
+                $tempAnswer->idQuestionID = $iNewQuestionID;
+                $tempAnswer->iOrder = $answer->iOrder;
+                $tempAnswer->idTriggers = $answer->idTriggers;
+                $tempAnswer->sAnswerText = $answer->sAnswerText;
+                $tempAnswer->sAnswerTextSpanish = $answer->sAnswerTextSpanish;
+                $tempAnswer->sRiskFactorText = $answer->sRiskFactorText;
+                $tempAnswer->sRiskFactorTextSpanish = $answer->sRiskFactorTextSpanish;
+                $tempAnswer->SaveAnswer();
+            }
         }
-    }
-    $newSurvey = new Survey($iResult,"ALL");
-}else{ //means it's an existing survey that was just updated
-    foreach($updatedSurveyData->qcQuestions as $question){
-        //questions
-        $tempQuestion = new Question($question->idQuestionID,"ALL");
-        $tempQuestion->idSurvey = $idnum;
-        $tempQuestion->iQuestionOrder = $question->iQuestionOrder;
-        $tempQuestion->sPreamble = $question->sPreamble;
-        $tempQuestion->sPreambleSpanish = $question->sPreambleSpanish;
-        $tempQuestion->sQuestionType = $question->sQuestionType;
-        $tempQuestion->sText = $question->sText;
-        $tempQuestion->sTextSpanish = $question->sTextSpanish;
-        $returnVal = $tempQuestion->SaveQuestion();
-        if($returnVal>1){
-            $tempQuestion->idQuestionID = $returnVal;
-        }
+        $newSurvey = new Survey($iResult,"ALL");
+    }else{ //means it's an existing survey that was just updated
+        foreach($updatedSurveyData->qcQuestions as $question){
+            //questions
+            $tempQuestion = new Question($question->idQuestionID,"ALL");
+            $tempQuestion->idSurvey = $idnum;
+            $tempQuestion->iQuestionOrder = $question->iQuestionOrder;
+            $tempQuestion->sPreamble = $question->sPreamble;
+            $tempQuestion->sPreambleSpanish = $question->sPreambleSpanish;
+            $tempQuestion->sQuestionType = $question->sQuestionType;
+            $tempQuestion->sText = $question->sText;
+            $tempQuestion->sTextSpanish = $question->sTextSpanish;
+            $returnVal = $tempQuestion->SaveQuestion();
+            if($returnVal>1){
+                $tempQuestion->idQuestionID = $returnVal;
+            }
 
-        //answers
-        foreach($question->aAnswers as $answer){
-            $tempAnswer = new Answer($answer->idAnswerID);
-            $tempAnswer->idSurveyID = $idnum;
-            $tempAnswer->idQuestionID = $tempQuestion->idQuestionID;
-            $tempAnswer->iOrder = $answer->iOrder;
-            $tempAnswer->idTriggers = $answer->idTriggers;
-            $tempAnswer->sAnswerText = $answer->sAnswerText;
-            $tempAnswer->sAnswerTextSpanish = $answer->sAnswerTextSpanish;
-            $tempAnswer->sRiskFactorText = $answer->sRiskFactorText;
-            $tempAnswer->sRiskFactorTextSpanish = $answer->sRiskFactorTextSpanish;
-            $tempAnswer->SaveAnswer();
+            //answers
+            foreach($question->aAnswers as $answer){
+                $tempAnswer = new Answer($answer->idAnswerID);
+                $tempAnswer->idSurveyID = $idnum;
+                $tempAnswer->idQuestionID = $tempQuestion->idQuestionID;
+                $tempAnswer->iOrder = $answer->iOrder;
+                $tempAnswer->idTriggers = $answer->idTriggers;
+                $tempAnswer->sAnswerText = $answer->sAnswerText;
+                $tempAnswer->sAnswerTextSpanish = $answer->sAnswerTextSpanish;
+                $tempAnswer->sRiskFactorText = $answer->sRiskFactorText;
+                $tempAnswer->sRiskFactorTextSpanish = $answer->sRiskFactorTextSpanish;
+                $tempAnswer->SaveAnswer();
+            }
         }
+        $newSurvey = new Survey($idnum,"ALL");
     }
-    $newSurvey = new Survey($idnum,"ALL");
+} catch(Exception $e){
+    die($e->getMessage());
 }
 
-echo json_encode($newSurvey);
+
+    echo json_encode($newSurvey);
 
 ?>

@@ -21,6 +21,10 @@ foreach (glob("classes/*.php") as $filename)
 $data = file_get_contents("php://input");
 $objData = json_decode($data);
 
+if(!isset($objData)){
+    die("nothing");
+}
+
 switch($objData->criteria){
     case "ResultsCollection":
         $surveyID = $objData->data;
@@ -41,9 +45,14 @@ switch($objData->criteria){
         echo $_results->ToJSON();
         break;
     case "DeleteSurvey":
-        $TempSurvey = new Survey($objData->data);
-        error_log("delete the survey "+$objData->data);
-        echo $TempSurvey->Delete();
+        try{
+            $TempSurvey = new Survey($objData->data);
+            error_log("delete the survey "+$objData->data);
+            echo $TempSurvey->Delete();
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+
         break;
     case "NewSurvey":
         $NewSurvey = new Survey();
@@ -74,8 +83,8 @@ switch($objData->criteria){
     case "surveyID":
 
         $survey = new Survey($objData->data,$objData->language,$objData->userID);
-
         echo $survey->ToJSON();
+
         break;
     case "BlankQuestion":
         $question = new Question(0,"ALL");
@@ -108,8 +117,29 @@ switch($objData->criteria){
         $question->idUsersAnswer = $answer->idAnswerID;
         $question->sUsersAnswerText = $userAnswer->sUsersAnswerText;
         echo $question->SaveUserAnswer($objData->userID,$answer);
-
         break;
+    case "CopySurvey":
+        $surveyID = $objData->data;
+        $survey = new Survey($surveyID);
+        $newID = $objData->newID;
+
+        //loop through and set all the IDs to null
+        $survey->idSurveyID = $newID;
+        for($x=0;$x<count($survey->qcQuestions);$x++){
+            $survey->qcQuestions[$x]->idQuestionID=null;
+            $survey->qcQuestions[$x]->idSurvey=null;
+
+            for($y=0;$y>count($survey->qcQuestions[$x]->aAnswers);$y++){
+                $survey->qcQuestions[$x]->aAnswers[$y]->idAnswerID = null;
+                $survey->qcQuestions[$x]->aAnswers[$y]->idSurveyID = null;
+                $survey->qcQuestions[$x]->aAnswers[$y]->idQuestionID = null;
+                $survey->qcQuestions[$x]->aAnswers[$y]->idTriggers = null;
+            }
+        }
+
+        echo $survey->ToJSON();
+        break;
+
 }
 
 

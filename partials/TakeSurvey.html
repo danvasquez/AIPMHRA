@@ -1,9 +1,16 @@
-<h1>{{survey.sTitle}}</h1>
-<div class="row-fluid" ng-show="SurveyFinished==true">
-    <h2>Survey Complete!</h2>
-    <h3><a href="./#/SurveyLanding/{{survey.idSurveyID}}">Click here to go back to survey home and view results</a></h3>
+<div class="row">
+    <div class="span10">
+        <h1>{{survey.sTitle}}</h1>
+    </div>
 </div>
-<div class="row-fluid">
+
+<div class="row" ng-show="SurveyFinished==true">
+    <div class="span10 FinishedBanner">
+        <h2>Survey Complete!</h2>
+        <h3><a href="./#/SurveyLanding/{{survey.idSurveyID}}">Click here to go back to survey home and view results</a></h3>
+    </div>
+</div>
+<div class="row">
     <div class="span2 Sidebar">
         <ol>
             <li ng-repeat="question in SidebarQuestionList" class="SidebarQuestions" ng-click="GoToQuestion(question)">
@@ -11,27 +18,22 @@
             </li>
         </ol>
     </div>
-    <div class="span10 offset2 Content">
-        <div class="row-fluid">
-            <div class="span4 offset4 QuestionPreamble" ng-show="PreambleDismissed==false">
+    <div class="span8 Content">
+        <div class="row">
+            <div class="span6 offset2 QuestionPreamble" ng-show="PreambleDismissed==false">
                 <p ng-bind="ActiveQuestion.sPreamble"></p>
                 <button class="btn btn-small" ng-show="PreambleDismissed==false" ng-click="DismissPreamble()">Continue</button>
             </div>
         </div>
 
-        <div class="clearfix"></div>
-
-        <div class="row-fluid">
-            <div class="span4 offset4 QuestionTest" ng-show="PreambleDismissed==true">
+        <div class="row">
+            <div class="span6 offset2 QuestionTest" ng-show="PreambleDismissed==true">
                 <p ng-bind="ActiveQuestion.sText"></p>
             </div>
         </div>
 
-        <div class="clearfix"></div>
-
-        <div class="row-fluid">
-            <div class="span4 offset4 QuestionForm" ng-show="PreambleDismissed">
-                <span class="text-error" ng-bind="ErrorMessage"></span>
+        <div class="row">
+            <div class="span6 offset2 QuestionForm" ng-show="PreambleDismissed">
                 <form name="frmActiveQuestionForm" ng-submit="SaveAnswer()" class="form-horizontal">
                     <div ng-switch on="ActiveQuestion.sQuestionType">
                         <div ng-switch-when="Textbox">
@@ -44,11 +46,11 @@
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success">Submit</button><br>
+                    <span class="text-error" ng-bind="ErrorMessage"></span>
                 </form>
             </div>
         </div>
-
     </div>
 
 </div>

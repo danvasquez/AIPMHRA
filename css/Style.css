@@ -12,6 +12,25 @@ h1{
 .navbar{
     font-size:20px !important;
 }
+.surveyTableTR:hover{
+    text-decoration: underline;
+    font-weight: 400;
+    cursor: pointer;
+}
+.userSurveyTable td{
+    font-size: 18px;
+    color:#191970;
+}
+
+.FinishedBanner{
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    border:2px solid #000000;
+    background-color: #fbf48b;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .nav-textOnly{
     height: 80px;
     line-height: 80px;
@@ -246,18 +265,23 @@ form.ng-invalid .btn[disabled], form.ng-valid .btn {
 .SidebarQuestions:hover{
     background-color: #ffffff;
 }
-
+.UserSurveyResults h1{
+        font-size:26px;
+}
+.UserSurveyResults h2{
+    font-size:22px;
+}
 .UserSurveyResults li strong{
-    font-size: 140%;
+    font-size: 120%;
 }
 .UserSurveyResults li p{
-    font-size:120%;
+    font-size:100%;
     color:gray;
     padding:10px;
 }
 .UserSurveyResults li em{
     font-style:normal;
-    font-size:130%;
+    font-size:110%;
     color:black;
 }
 .RiskFactor{
@@ -285,4 +309,17 @@ form.ng-invalid .btn[disabled], form.ng-valid .btn {
 }
 .white{
     background-color: #ffffff!important;
+}
+
+@media print {
+    .navbar,.Sidebar,.footer,.languageOption,iframe{
+        display: none !important;
+    }
+    .container{
+        border:none;
+    }
+    body{
+        background-color: #ffffff;
+    }
+
 }

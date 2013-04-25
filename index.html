@@ -28,7 +28,7 @@
         <a class="brand" href="#" ng-hide="LoggedInUser.sCompanyName">Health Assessment Survey</a>
         <ul class="nav">
             <li class="divider-vertical"></li>
-            <li class="nav-textOnly">Welcome {{LoggedInUser.sFullName}}</li>
+            <li class="nav-textOnly" ng-show="LoggedInUser.sFullName">Welcome {{LoggedInUser.sFullName}}</li>
         </ul>
     </div>
 </div>
