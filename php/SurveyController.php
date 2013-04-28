@@ -122,18 +122,21 @@ switch($objData->criteria){
         $surveyID = $objData->data;
         $survey = new Survey($surveyID);
         $newID = $objData->newID;
+        $companyID = $objData->companyID;
 
         //loop through and set all the IDs to null
         $survey->idSurveyID = $newID;
+        $survey->iCompany = $companyID;
+
         for($x=0;$x<count($survey->qcQuestions);$x++){
-            $survey->qcQuestions[$x]->idQuestionID=null;
-            $survey->qcQuestions[$x]->idSurvey=null;
+            $survey->qcQuestions[$x]->idQuestionID=0;
+            $survey->qcQuestions[$x]->idSurvey=0;
 
             for($y=0;$y>count($survey->qcQuestions[$x]->aAnswers);$y++){
-                $survey->qcQuestions[$x]->aAnswers[$y]->idAnswerID = null;
-                $survey->qcQuestions[$x]->aAnswers[$y]->idSurveyID = null;
-                $survey->qcQuestions[$x]->aAnswers[$y]->idQuestionID = null;
-                $survey->qcQuestions[$x]->aAnswers[$y]->idTriggers = null;
+                $survey->qcQuestions[$x]->aAnswers[$y]->idAnswerID = 0;
+                $survey->qcQuestions[$x]->aAnswers[$y]->idSurveyID = 0;
+                $survey->qcQuestions[$x]->aAnswers[$y]->idQuestionID = 0;
+                $survey->qcQuestions[$x]->aAnswers[$y]->idTriggers = 0;
             }
         }
 

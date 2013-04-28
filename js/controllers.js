@@ -594,11 +594,12 @@ function SurveyEditCtrl($scope,$routeParams,$http){
     }
 
     $scope.copySurvey = function($copySurveyID){
-
-        $http.post($scope.url, { "criteria":"CopySurvey","data" : $copySurveyID,"newID": $scope.surveyID,"language":"ALL"}).
+        var companyid = $scope.survey.iCompany;
+        $http.post($scope.url, { "criteria":"CopySurvey","data" : $copySurveyID,"newID": $scope.surveyID,"companyID":companyid,"language":"ALL"}).
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
+
                 $scope.survey = data;
                 $scope.apply();
             })

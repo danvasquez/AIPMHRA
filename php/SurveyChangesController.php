@@ -55,8 +55,13 @@ $existingSurveyData->qcQuestions = $updatedSurveyData->qcQuestions;
 
 $iResult = $existingSurveyData->SaveSurvey(); //going to get back either 0 for update failed, 1 for update succeeded, or the new id
 
+$stepTester = 0;
+
 try{
     if($iResult>1){   //means it's a new survey that was just inserted
+
+        $stepTester = "new survey";
+
         foreach($updatedSurveyData->qcQuestions as $question){
             //questions
             $tempQuestion = new Question($question->idQuestionID,"ALL");
@@ -68,6 +73,8 @@ try{
             $tempQuestion->sText = $question->sText;
             $tempQuestion->sTextSpanish = $question->sTextSpanish;
             $iNewQuestionID = $tempQuestion->SaveQuestion();
+
+
 
             //answers
             foreach($question->aAnswers as $answer){
@@ -83,9 +90,19 @@ try{
                 $tempAnswer->SaveAnswer();
             }
         }
+
+        $stepTester = "new survey 1";
+
         $newSurvey = new Survey($iResult,"ALL");
+
+        $stepTester = "new survey 2";
+
     }else{ //means it's an existing survey that was just updated
+
+        $stepTester = "existing 1";
+
         foreach($updatedSurveyData->qcQuestions as $question){
+
             //questions
             $tempQuestion = new Question($question->idQuestionID,"ALL");
             $tempQuestion->idSurvey = $idnum;
@@ -114,10 +131,15 @@ try{
                 $tempAnswer->SaveAnswer();
             }
         }
+
+        $stepTester = "existing 2";
+
         $newSurvey = new Survey($idnum,"ALL");
+
+        $stepTester = "existing 3";
     }
 } catch(Exception $e){
-    die($e->getMessage());
+    die($stepTester." | ".$e->getMessage());
 }
 
 
