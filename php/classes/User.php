@@ -25,7 +25,7 @@ class User
 
     function User($_userID=0){
         $this->idUserID = $_userID;
-        error_log("NEW User OBJECT ID=".$this->idUserID);
+        //error_log("NEW User OBJECT ID=".$this->idUserID);
         $this->GetUserInfo();
         $this->GetCompanyInfo();
 
@@ -33,8 +33,25 @@ class User
     public function Delete(){
         if($this->idUserID > 0){
             $sql = new SQLConnection();
-            return $sql->DoDeleteQuery("DELETE FROM users WHERE id=:id LIMIT 1",array("id"=>$this->idUserID));
+            return $sql->DoDeleteQuery("DELETE FROM users WHERE id=:id LIMIT 1",array(":id"=>$this->idUserID));
         }else{return false;}
+    }
+
+    public function GetPassword($userID = null){
+        if(!isset($userID)){
+            throw new Exception('No User ID Given');
+        }
+
+        $sql = new SQLConnection();
+        error_log("\nUSERID:".$userID);
+        $result = $sql->DoSelectQuery("SELECT password from users where userid=:userid LIMIT 1",array(":userid"=>$userID));
+        if(is_array($result)){
+            //return the password
+            error_log($result[0]['password']);
+            return $result[0]['password'];
+        }else{
+            throw new Exception("UserID Not Found");
+        }
     }
 
     private function GetUserInfo(){

@@ -19,6 +19,19 @@ function AdminResultsCtrl($scope,$routeParams,$http){
             $scope.status = status;
         });
 
+    $scope.DownloadPDF = function(){
+        var fileString = document.documentElement.outerHTML;
+        var fileName = "C"+$scope.$root.LoggedInUser.companyID+"S"+TheSurveyID+"_Results.pdf"
+        $http.post("./php/PDFController.php",{"fileString":fileString,"fileName":fileName}).
+            success(function(data,status){
+                console.log("SUCCESS");
+                window.open("./php/"+data);
+            })
+            .error(function(data,status){
+                console.log('NO RESPONSE');
+            });
+    }
+
 }
 function UserResultsCtrl($scope,$routeParams,$http){
     $scope.$root.CheckLogin(3);

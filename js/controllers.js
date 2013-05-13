@@ -456,30 +456,57 @@ function UserSurveyCtrl($scope,$http){
 }
 function HomeCtrl($scope,$http){
     $scope.$root.CheckLogin(3);
-    //console.log($scope.$root.LoggedInUser.txtHometext);
-    $scope.homeHTML = unescape($scope.$root.LoggedInUser.txtHometext);
-    console.log($scope.homeHTML);
-    console.log("Home Now");
 
-    $scope.$apply();
+    $scope.homeHTML = unescape($scope.$root.LoggedInUser.txtHometext);
+
+    //$scope.$apply();
+}
+
+function ShowPass(){
+    $('#passwordForm').toggle();
 }
 function LoginCtrl($scope,$http,$cookies){
-    console.log("loginCtrl Loaded");
+    $scope.ShowPasswordForm=false;
+    $scope.url = './php/LoginController.php';
+
+    $scope.ShowPass = function(val){
+        $scope.ShowPasswordForm = !(val);
+    }
+
+    $scope.MailPassword = function(email){
+        $http.post('./php/GetPassword.php', { "sUserID":email}).
+            success(function(data, status) {
+                $scope.status = status;
+                if(data>"0"){
+                    alert('password sent!');
+                }else{
+                    alert('Login not found!');
+                }
+
+            })
+            .
+            error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+                $scope.ErrorMessage = "Invalid Login, please try again";
+            });
+    }
+
     $scope.Login = function(){
-        $scope.url = './php/LoginController.php';
+
         console.log("attempting login with "+$scope.LogInUserID);
         $http.post($scope.url, { "sUserID":$scope.LogInUserID,"sPassword":$scope.LogInUserPWD }).
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
                 if(data>"0"){
-                    $cookies.LoggedInUserID = data;
                     $scope.$root.FillUserData(data);
-                    console.log("logged in and transferring home")
-                    window.location.href="#/home";
+                    $cookies.LoggedInUserID = data;
+                    $scope.ErrorMessage = "Welcome";
+                }else{
+                    $scope.ErrorMessage = "Invalid Login, please try again";
                 }
-                $scope.ErrorMessage = "Welcome";
+
             })
             .
             error(function(data, status) {

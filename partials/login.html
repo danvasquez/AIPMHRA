@@ -1,6 +1,12 @@
 <div class="row">
     <div class="span8 offset2 text-center">
-        <h1 class="loginh1">Welcome</h1>
+        <h1 class="loginh1">Welcome</h1><br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span8 offset2 text-center">
+
     </div>
 </div>
 
@@ -8,6 +14,7 @@
     <form class="span8 offset2 form-horizontal" ng-submit="Login()">
 
         <legend>Please Login Below</legend>
+        Or <a href='./#/register'>register here</a>
 
         <div class="control-group">
             <label class="control-label">User ID:</label>
@@ -31,8 +38,25 @@
             </div>
         </div>
 
-        <p>
-            Or <a href='./#/register'>register here</a>
-        </p>
+
     </form>
 </div>
+        <div class="row">
+            <div id="forgotPwd" class="span8 offset2">
+                <div id="loginLink" ng-click="ShowPass(ShowPasswordForm)">Forgot Password?</div>
+                <form id="passwordForm" ng-show="ShowPasswordForm" ng-submit="MailPassword(forgotUserID)">
+                    <legend>Your password will be emailed to you:</legend>
+                    <div class="control-group">
+                        <label class="control-label">User ID:</label>
+                        <div class="controls">
+                            <input type="email" ng-model="forgotUserID" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn-small" type="submit">Get Password</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>

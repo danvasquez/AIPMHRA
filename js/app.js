@@ -5,7 +5,7 @@
  * Time: 9:18 PM
  * To change this template use File | Settings | File Templates.
  */
-var app = angular.module('healthsurvey',['ngCookies','ngSanitize','charts.pie']);
+var app = angular.module('healthsurvey',['ngCookies','ngSanitize','charts.pie','SharedServices']);
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
         when('/admin-surveys', {templateUrl: 'partials/admin-surveys.html',   controller: SurveyAdminCtrl}).
@@ -26,7 +26,7 @@ app.config(['$routeProvider', function($routeProvider) {
         otherwise({redirectTo: '/login', controller:LoginCtrl});
     }]);
 
-app.run(function($rootScope,$http,$cookies) {
+app.run(function($rootScope,$http,$cookies,$location) {
     $rootScope.SurveyLangage="ENGLISH";
     $rootScope.QuestionTypes = [{"value":"Textbox","text":"TextBox"},{"value":"option","text":"Option"}];
     console.log('qt:'+$rootScope.QuestionTypes)
@@ -92,7 +92,7 @@ app.run(function($rootScope,$http,$cookies) {
                 success(function(data, status) {
                     console.log(data);
                     $rootScope.LoggedInUser = data;
-
+                    $location.path('home');
                 })
                 .
                 error(function(data, status) {
@@ -129,6 +129,35 @@ app.directive('passwordValidate', function() {
         }
     };
 });
+
+
+angular.module('SharedServices', [])
+    .config(function ($httpProvider) {
+        $httpProvider.responseInterceptors.push('myHttpInterceptor');
+        var spinnerFunction = function (data, headersGetter) {
+            // todo start the spinner here
+            $('#loading').show();
+            return data;
+        };
+        $httpProvider.defaults.transformRequest.push(spinnerFunction);
+    })
+// register the interceptor as a service, intercepts ALL angular ajax http calls
+    .factory('myHttpInterceptor', function ($q, $window) {
+        return function (promise) {
+            return promise.then(function (response) {
+                // do something on success
+                // todo hide the spinner
+                $('#loading').hide();
+                return response;
+
+            }, function (response) {
+                // do something on error
+                // todo hide the spinner
+                $('#loading').hide();
+                return $q.reject(response);
+            });
+        };
+    })
 
 angular.module('charts.pie', [
 ])

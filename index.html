@@ -6,34 +6,76 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Style.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <script>
+        if(!window.console){
+            console = {log: function(){}};
+        }
+        if (!Object.keys) {
+            Object.keys = (function () {
+                var hasOwnProperty = Object.prototype.hasOwnProperty,
+                        hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+                        dontEnums = [
+                            'toString',
+                            'toLocaleString',
+                            'valueOf',
+                            'hasOwnProperty',
+                            'isPrototypeOf',
+                            'propertyIsEnumerable',
+                            'constructor'
+                        ],
+                        dontEnumsLength = dontEnums.length;
+
+                return function (obj) {
+                    if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) throw new TypeError('Object.keys called on non-object');
+
+                    var result = [];
+
+                    for (var prop in obj) {
+                        if (hasOwnProperty.call(obj, prop)) result.push(prop);
+                    }
+
+                    if (hasDontEnumBug) {
+                        for (var i=0; i < dontEnumsLength; i++) {
+                            if (hasOwnProperty.call(obj, dontEnums[i])) result.push(dontEnums[i]);
+                        }
+                    }
+                    return result;
+                }
+            })()
+        };
+    </script>
     <script src="js/angular.js"></script>
     <script src="js/angular-cookies.js"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/app.js?v=0.0.1"></script>
-    <script src="js/controllers.js?v=0.0.1"></script>
+    <script src="js/app.js?v=0.0.4"></script>
+    <script src="js/controllers.js?v=0.0.4"></script>
     <script src="js/TakeSurvey.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular-sanitize.min.js"></script>
+
 </head>
 <body ng-cloak class="ng-cloak">
 
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
 
-        <ul class="nav">
-            <li><a href="./#/home">Home</a></li>
-            <li class="divider-vertical"></li>
-        </ul>
-        <a class="brand" href="#" ng-show="LoggedInUser.sCompanyName">{{LoggedInUser.sCompanyName}}</a>
-        <a class="brand" href="#" ng-hide="LoggedInUser.sCompanyName">Health Assessment Survey</a>
-        <ul class="nav">
-            <li class="divider-vertical"></li>
-            <li class="nav-textOnly" ng-show="LoggedInUser.sFullName">Welcome {{LoggedInUser.sFullName}}</li>
-        </ul>
-    </div>
-</div>
 
 <div class="container">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+
+            <ul class="nav">
+                <li><a href="./#/home">Home</a></li>
+                <li class="divider-vertical"></li>
+            </ul>
+            <a class="brand" href="#" ng-show="LoggedInUser.sCompanyName">{{LoggedInUser.sCompanyName}}</a>
+            <a class="brand" href="#" ng-hide="LoggedInUser.sCompanyName">Health Assessment Survey</a>
+            <ul class="nav">
+                <li class="divider-vertical"></li>
+                <li class="nav-textOnly" ng-show="LoggedInUser.sFullName">Welcome {{LoggedInUser.sFullName}}</li>
+            </ul>
+        </div>
+    </div>
+
         <div class="row">
             <div class="span2 Sidebar" ng-show="LoggedInUser">
                 <img ng-src="{{LoggedInUser.urlCompanyLogo}}" style="max-width: 100%; padding-top: 10px; max-height:300px;"/>
@@ -60,6 +102,9 @@
 
             </div>
             <div class="span10 Content">
+                <div class="row">
+                    <div class="span10" id="loading"><span class="text-info">Loading...</span></div>
+                </div>
                 <div ng-view class="row"></div>
             </div>
         </div>

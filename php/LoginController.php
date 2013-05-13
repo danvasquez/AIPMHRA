@@ -22,10 +22,10 @@ if(isset($objData->sUserID) && isset($objData->sPassword)){
         //success
         echo $tempUser->idUserID;
     }else{
-        header('HTTP/1.0 401 Unauthorized');
+        echo 0;
     }
 }else{
-    header('HTTP/1.0 401 Unauthorized');
+    echo 0;
 }
 
 
