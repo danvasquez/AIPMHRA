@@ -9,9 +9,7 @@ function AdminResultsCtrl($scope,$routeParams,$http){
         success(function(data, status) {
             $scope.status = status;
             $scope.data = data;
-            console.log(data);
             $scope.results = data;
-            console.log($scope.results.survey.qcQuestions[0].resultsStats);
         })
         .
         error(function(data, status) {
@@ -24,11 +22,11 @@ function AdminResultsCtrl($scope,$routeParams,$http){
         var fileName = "C"+$scope.$root.LoggedInUser.companyID+"S"+TheSurveyID+"_Results.pdf"
         $http.post("./php/PDFController.php",{"fileString":fileString,"fileName":fileName}).
             success(function(data,status){
-                console.log("SUCCESS");
+
                 window.open("./php/"+data);
             })
             .error(function(data,status){
-                console.log('NO RESPONSE');
+
             });
     }
 
@@ -48,7 +46,7 @@ function UserResultsCtrl($scope,$routeParams,$http){
         var fileName = "U"+$scope.$root.LoggedInUser.idUserID+"S"+TheSurveyID+"_Results.pdf"
         $http.post("./php/PDFController.php",{"fileString":fileString,"fileName":fileName}).
             success(function(data,status){
-                console.log("SUCCESS");
+
                 window.open("./php/"+data);
             })
             .error(function(data,status){
@@ -63,7 +61,7 @@ function UserResultsCtrl($scope,$routeParams,$http){
                 success(function(data, status) {
                     $scope.status = status;
                     $scope.data = data;
-                    console.log(data);
+
                     $scope.survey = data;
                     $scope.SidebarQuestionList = new Array();
 
@@ -75,10 +73,8 @@ function UserResultsCtrl($scope,$routeParams,$http){
                     }
 
                     if($scope.survey.numTopQuestion <= $scope.SidebarQuestionList.length){
-                        console.log("Finish Check "+$scope.survey.qcQuestions.length+" "+$scope.SidebarQuestionList.length);
                         $scope.SurveyFinished=true;
                     }else{
-                        console.log("Finish Check X"+$scope.survey.qcQuestions.length+" "+$scope.SidebarQuestionList.length);
                     }
 
                 })
@@ -92,7 +88,6 @@ function UserResultsCtrl($scope,$routeParams,$http){
 
 
     $scope.ChangeLanguage=function(lang){
-        console.log("lang");
         $scope.ActiveLanguage = lang;
         $scope.GetResults();
     }
@@ -114,7 +109,7 @@ function SurveyLandingCtrl($scope,$routeParams,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
+
                 $scope.survey = data;
                 $scope.SidebarQuestionList = new Array();
 
@@ -182,7 +177,6 @@ function TakeSurveyCtrl($scope,$routeParams,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
                 var triggerq = 0;
                 if(data=='1'){
                     //set the useranswer and text in the main survey model
@@ -247,7 +241,7 @@ function TakeSurveyCtrl($scope,$routeParams,$http){
             }
         }
 
-        if($scope.survey.numTopQuestion <= $scope.SidebarQuestionList.length){
+        if($scope.survey.numTopQuestion <= $scope.SidebarQuestionList.length + 1){
             $scope.SurveyFinished=true;
         }
 
@@ -257,9 +251,9 @@ function TakeSurveyCtrl($scope,$routeParams,$http){
             console.log("checking for trigger "+question.idQuestionID+": "+triggerq);
             //if(question.idQuestionID == $scope.ActiveQuestion)
             if(question.idQuestionID==triggerq){
-
+                console.log('trigger q set');
                 $scope.ActiveQuestion = question;
-
+                break;
             }else if(question.idUsersAnswer==0 && question.iIsTrigger<=0){
 
                 if(question.sPreamble != null && $.trim(question.sPreamble) !=""){$scope.PreambleDismissed = false;}else{$scope.PreambleDismissed=true;}
@@ -279,7 +273,7 @@ function TakeSurveyCtrl($scope,$routeParams,$http){
 
         //if there's no Active Question at this point it means the user has already done the survey, go back to the beginning
         if($scope.ActiveQuestion == null){
-
+            console.log('never got a trigger');
             $scope.ActiveQuestion = $scope.survey.qcQuestions[0];
 
             if($scope.ActiveQuestion.sPreamble != null && $.trim($scope.ActiveQuestion.sPreamble) !=""){

@@ -20,9 +20,9 @@
     </div>
     <div class="span8 Content">
         <div class="row">
-            <div class="span6 offset2 QuestionPreamble" ng-show="PreambleDismissed==false">
+            <div class="span6 offset2 QuestionPreamble" ng-hide="PreambleDismissed==true">
                 <p ng-bind="ActiveQuestion.sPreamble"></p>
-                <button class="btn btn-small" ng-show="PreambleDismissed==false" ng-click="DismissPreamble()">Continue</button>
+                <button class="btn btn-small" ng-hide="PreambleDismissed==true" ng-click="DismissPreamble()">Continue</button>
             </div>
         </div>
 

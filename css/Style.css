@@ -327,6 +327,10 @@ form.ng-invalid .btn[disabled], form.ng-valid .btn {
     background-color: #ffffff!important;
 }
 
+.QuestionPreamble{
+    visibility: hidden;
+}
+
 @media print {
     .navbar,.Sidebar,.footer,.languageOption,iframe,#loading{
         display: none !important;
