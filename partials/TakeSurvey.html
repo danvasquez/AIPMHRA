@@ -11,29 +11,29 @@
     </div>
 </div>
 <div class="row">
-    <div class="span2 Sidebar">
+    <div class="span3 Sidebar">
         <ol>
             <li ng-repeat="question in SidebarQuestionList" class="SidebarQuestions" ng-click="GoToQuestion(question)">
                 {{question.sText}}
             </li>
         </ol>
     </div>
-    <div class="span8 Content">
+    <div class="span7 Content">
         <div class="row">
-            <div class="span6 offset2 QuestionPreamble" ng-hide="PreambleDismissed==true">
-                <p ng-bind="ActiveQuestion.sPreamble"></p>
+            <div class="span7 QuestionPreamble" ng-hide="PreambleDismissed==true">
+                <p ng-bind="ActiveQuestion.sPreamble">test</p>
                 <button class="btn btn-small" ng-hide="PreambleDismissed==true" ng-click="DismissPreamble()">Continue</button>
             </div>
         </div>
 
         <div class="row">
-            <div class="span6 offset2 QuestionTest" ng-show="PreambleDismissed==true">
+            <div class="span7 QuestionTest" ng-show="PreambleDismissed==true">
                 <p ng-bind="ActiveQuestion.sText"></p>
             </div>
         </div>
 
         <div class="row">
-            <div class="span6 offset2 QuestionForm" ng-show="PreambleDismissed">
+            <div class="span7 QuestionForm" ng-show="PreambleDismissed">
                 <form name="frmActiveQuestionForm" ng-submit="SaveAnswer()" class="form-horizontal">
                     <div ng-switch on="ActiveQuestion.sQuestionType">
                         <div ng-switch-when="Textbox">

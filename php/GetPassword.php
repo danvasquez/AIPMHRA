@@ -28,8 +28,28 @@ if(isset($userID)){
         $password = $user->GetPassword($userID);
         if(isset($password)){
             //mail it to the id
-            mail($sUserID,"Your HRA Survey Password","Please store this password in a safe place.\n Your Password is: $password");
-            echo 1;
+		$mail = new PHPMailer();
+		$mail->IsSMTP();  // telling the class to use SMTP
+		$mail->Host     = "smtp.gmail.com"; // SMTP server
+		$mail->SetFrom("vasquez.dan@gmail.com","Healthylife Admin");		
+		$mail->SMTPAuth = true;
+		
+		$mail->Username = "vasquez.dan@gmail.com";
+		$mail->Password = "danV6394";
+		$mail->SMTPSecure = "ssl";
+		$mail->Port = 465;
+		$mail->AddAddress($userID);
+		$mail->Subject  = "Your HRA Survey Password";
+		            
+		$mail->Body = "Please store this password in a safe place.\n Your Password is: $password";
+		$mail->WordWrap = 50;
+
+		if(!$mail->Send()){
+			die($mail->ErrorInfo);
+			echo 0;
+		}else{
+			echo 1;
+		}          
         }
 
     }catch(Exception $e){

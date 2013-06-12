@@ -64,7 +64,7 @@ span{
 }
 .Sidebar{
     /*position: fixed;*/
-    text-align: center;
+    text-align: center;	
 }
 
 .Sidebar .nav{
@@ -328,7 +328,7 @@ form.ng-invalid .btn[disabled], form.ng-valid .btn {
 }
 
 .QuestionPreamble{
-    visibility: hidden;
+    
 }
 
 @media print {
