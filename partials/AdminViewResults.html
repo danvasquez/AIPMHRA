@@ -20,8 +20,11 @@
         </div>
 
         <div class="row well well-small" ng-repeat="question in results.survey.qcQuestions">
-            <div class="span3 ResultsQuestionText">{{question.sText}}</div>
-            <div class="span4 white">
+            <div class="row">
+                <div class="span10 ResultsQuestionText">{{question.sText}}</div>
+            </div>
+        <div class="row">
+            <div class="span5 white">
                 <div ng-show="question.sQuestionType=='option'">
                     <table class="table table-striped">
 
@@ -43,8 +46,8 @@
                     Text
                 </div>
             </div>
-            <div class="span3 white">
-                <div style="width: 100%" ng-show="question.sQuestionType=='option'" ng-model="question.resultsStats"
+            <div class="span5 white">
+                <div style="width: 95%" ng-show="question.sQuestionType=='option'" ng-model="question.resultsStats"
                      qn:columns="[{type:'string', name: 'Answer'},{type:'number', name: 'Responses'}]"
                      qn:piechart="{
                 legend : {alignment: 'center'},

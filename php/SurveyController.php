@@ -22,7 +22,7 @@ $data = file_get_contents("php://input");
 $objData = json_decode($data);
 
 if(!isset($objData)){
-    die("nothing");
+    echo "nothing";
 }
 
 switch($objData->criteria){
@@ -111,12 +111,49 @@ switch($objData->criteria){
         break;
     case "SaveUserAnswer":
         $userAnswer = $objData->data;
-        error_log('Answer ID = '.$userAnswer->idUsersAnswer);
-        $answer = new Answer($userAnswer->idUsersAnswer);
-        $question = new Question($answer->idQuestionID);
-        $question->idUsersAnswer = $answer->idAnswerID;
-        $question->sUsersAnswerText = $userAnswer->sUsersAnswerText;
-        echo $question->SaveUserAnswer($objData->userID,$answer);
+	$qType = $userAnswer->sQuestionType; 
+error_log("STARTING TO SAVE::::");        
+try{
+        
+
+		if(is_array($userAnswer->idUsersAnswer)){
+
+				//if its a checkbox delete all answers
+				if($qType == "checkbox"){
+					$delQuery = "delete from userdata where question=:question and survey=:survey and user=:user";
+					$params = array(':question'=>$userAnswer->idQuestionID,':survey'=>$userAnswer->idSurvey,':user'=>$objData->userID);
+					$sql = new SQLConnection();
+					$sql->DoDeleteQuery($delQuery,$params);
+				}
+			$count = 0;
+			foreach($userAnswer->idUsersAnswer as $ans){
+				$count++;
+				$answer = new Answer($ans);
+				error_log("ans: ".$ans);
+				 $question = new Question($userAnswer->idQuestionID);
+			        $question->idUsersAnswer = $ans;
+			        //$question->sUsersAnswerText = $ans->sAnswerText;			
+				if($question->SaveUserAnswer($objData->userID,$answer,$qType)!=1){
+					throw new Exception("Problem Saving Answer");
+				}			
+			}
+		echo 1;
+		}else{	
+			$answer = new Answer($userAnswer->idUsersAnswer);
+	        	$question = new Question($answer->idQuestionID);
+	        	$question->idUsersAnswer = $answer->idAnswerID;
+		        $question->sUsersAnswerText = $userAnswer->sUsersAnswerText;
+			
+			if($question->SaveUserAnswer($objData->userID,$answer,$qType)!=1){
+				throw new Exception("Problem Saving Answer");
+			}else{
+				echo 1;
+			}
+	
+		}	
+        }catch(Exception $e){
+		echo $e->getMessage();	
+	}
         break;
     case "CopySurvey":
         $surveyID = $objData->data;

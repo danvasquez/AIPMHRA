@@ -28,8 +28,8 @@ app.config(['$routeProvider', function($routeProvider) {
 
 app.run(function($rootScope,$http,$cookies,$location) {
     $rootScope.SurveyLangage="ENGLISH";
-    $rootScope.QuestionTypes = [{"value":"Textbox","text":"TextBox"},{"value":"option","text":"Option"}];
-    console.log('qt:'+$rootScope.QuestionTypes)
+    $rootScope.QuestionTypes = [{"value":"Textbox","text":"TextBox"},{"value":"option","text":"Option"},{"value":"checkbox","text":"Multiple Choice"}];
+    
 
     $rootScope.ErrorMessage = "";
     $rootScope.companyList = "";
@@ -38,12 +38,12 @@ app.run(function($rootScope,$http,$cookies,$location) {
     $rootScope.FillCompanyFilterList = function(){
         $http.post('./php/CompanyController.php',{"criteria":"GetCompanies","iRole":$rootScope.LoggedInUser.iRole,"idCompanyID":$rootScope.LoggedInUser.idCompanyID}).
             success(function(data,status){
-                console.log("FILLCOMPANY");
+                
                 $rootScope.companyList = data;
             })
             .
             error(function(data,status){
-                console.log("FILLCOMPANY - FAILED");
+                
             })
     }
 
@@ -55,8 +55,7 @@ app.run(function($rootScope,$http,$cookies,$location) {
 
     $rootScope.CheckLogin = function(req){
 
-        console.log("checking login");
-
+        
         if($cookies.LoggedInUserID<1){
             window.location.href="#/login";
         }
@@ -67,10 +66,9 @@ app.run(function($rootScope,$http,$cookies,$location) {
         }else{
 
             if($rootScope.LoggedInUser.iRole==null){
-                console.log('role was null, going back to login');
+                
                 window.location.href="#/login";
             }else if($rootScope.LoggedInUser.iRole>req){
-                console.log($rootScope.LoggedInUser.iRole+" / "+req);
                 $rootScope.ErrorMessage = "You are not authorized for that action";
                 window.location.href="#/home";
             }
@@ -86,11 +84,11 @@ app.run(function($rootScope,$http,$cookies,$location) {
 
         if(uid!=null){
 
-        console.log("uid is"+uid);
+        
 
             $http.post('./php/UserController.php', { "criteria":"GetSingleUser","data":uid}).
                 success(function(data, status) {
-                    console.log(data);
+                    
                     $rootScope.LoggedInUser = data;
                     $location.path('home');
                 })
@@ -193,7 +191,7 @@ angular.module('charts.pie', [
                         var drawChart = function() {
                             var data = getDataTable();
                             // set model
-                            console.log("DV "+controller.$viewValue);
+                            
 
                             var o = new Array();
 
@@ -201,11 +199,11 @@ angular.module('charts.pie', [
                                 var row = controller.$viewValue[x];
                                 var val = row[1];
                                 row[1] = parseInt(val);
-                                console.log("row = "+row);
+                           
                                 o.push(row);
                             }
 
-                            console.log("DAN"+o);
+                          
                             data.addRows(o);
 
                             // Instantiate and draw our chart, passing in some options.

@@ -32,13 +32,13 @@ function EnrollmentCtrl($scope,$http){
     $scope.CheckUsers=function(){
         //get all the users of this company
         $scope.url = './php/UserController.php';
-        console.log("gonna check users now");
+        
 
             $http.post($scope.url, { "criteria":"GetUsers","iRole":$scope.$root.LoggedInUser.iRole,"idCompanyID":$scope.companyID}).
                 success(function(data, status) {
                     $scope.status = status;
                     $scope.data = data;
-                    console.log("got users"+data);
+                    
                     $scope.UsersList = data;
 
                     $scope.$root.ErrorMessage = "Looking for users...";
@@ -53,7 +53,7 @@ function EnrollmentCtrl($scope,$http){
                             if($.trim(pid)== $.trim(xpid)){
                                 $scope.FoundUsers.push(xrow);
                             }else{
-                                console.log("pid="+pid+" & xpid="+xpid);
+                                //do nothing
                             }
                         }
                     }
@@ -70,7 +70,6 @@ function EnrollmentCtrl($scope,$http){
     }
 
     $scope.CheckUpload=function(evt){
-        console.log("checking upload"+evt.target.files[0]);
         var file = evt.target.files[0]; // FileList object
 
         $scope.$apply(function(){
@@ -82,7 +81,7 @@ function EnrollmentCtrl($scope,$http){
         // Closure to capture the file information.
         reader.onload = (function(theFile) {
                 var allTextLines = theFile.target.result.split(/\r\n|\n/);
-                console.log("alltextlines");
+                
                 var headers = allTextLines[0].split(',');
                 var lines = [];
 
@@ -135,7 +134,7 @@ function CompanyAdminCtrl($scope,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
+                
                 $scope.companies = data;
             })
             .
@@ -163,7 +162,7 @@ function UserAdminCtrl($scope,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
+                
                 $scope.users = data;
             })
             .
@@ -188,7 +187,7 @@ function RegisterCtrl($scope,$routeParams,$http,$cookies){
         success(function(data, status) {
             $scope.status = status;
             $scope.data = data;
-            console.log(data);
+            
             $scope.user = data;
         })
         .
@@ -202,27 +201,24 @@ function RegisterCtrl($scope,$routeParams,$http,$cookies){
         //check if user ID exists already
         $http.post("./php/UserController.php", { "criteria":"CheckUserIDExists","data":$scope.user.sUserID}).
             success(function(data, status) {
-                console.log(data);
                 if(data==1){
                     //it already exists
-                    console.log("IT EXISTS");
+                    
                     $scope.$root.ErrorMessage="That User ID is already registered.";
                 }else{
-                    console.log("continuing");
+                    
                     //check that the company Code is good
                     $http.post("./php/CompanyController.php", { "criteria":"CheckCompanyCode","data":$scope.sCompanyCode}).
                         success(function(data, status) {
-                            console.log("response from company"+data);
+                            
                             if(data.idCompanyID != null && data.idCompanyID!='0'){
                                 //it already exists
-                                console.log("continuing with companyID "+data.idCompanyID);
                                 //do stuff to get correct company info before saving
                                 $scope.user.idCompanyID = data.idCompanyID;
                                 $scope.user.sCompanyName = data.sCompanyName;
                                 $scope.user.urlCompanyLogo = data.urlCompanyLogo;
 
                                 //save the user
-                                console.log("SAVING USER NEXT");
                                 if($scope.NewPassword.length>0){
                                     $scope.user.pPassword = $scope.NewPassword;
                                 }
@@ -231,7 +227,6 @@ function RegisterCtrl($scope,$routeParams,$http,$cookies){
                                     success(function(data, status) {
                                         $scope.status = status;
                                         $scope.data = data;
-                                        console.log(data);
                                         if(data == '0'){
                                             $scope.$root.ErrorMessage = "Problem: Could not save user";
                                         }else if(data>"0"){
@@ -287,9 +282,7 @@ function UserEditCtrl($scope,$routeParams,$http){
     $scope.NewPassword = "";
     $scope.HasNewPassword = false;
     $scope.NewPasswordIsValid = false;
-
-
-    console.log("UserID="+$scope.userID);
+    
 
     $scope.DeleteUser = function(){
         $http.post("./php/UserController.php", { "criteria":"DeleteUser","data" : $scope.userID}).
@@ -320,7 +313,7 @@ function UserEditCtrl($scope,$routeParams,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
+               
                 if(data == '0'){
                     $scope.$root.ErrorMessage = "Problem: Could not save user";
                 }else if(data=='1'){
@@ -344,7 +337,6 @@ function UserEditCtrl($scope,$routeParams,$http){
         success(function(data, status) {
             $scope.status = status;
             $scope.data = data;
-            console.log(data);
             $scope.user = data;
         })
         .
@@ -361,12 +353,12 @@ function CompanyEditCtrl($scope,$routeParams,$http){
     $scope.$root.CheckLogin(1);
     $scope.url = './php/CompanyController.php';
     $scope.companyID = $routeParams.companyID;
-    console.log("CompanyID="+$scope.companyID);
+    
 
     $scope.UploadNewLogo = function(){
         $scope.$root.ErrorMessage = $('#frmUploadLogo').serialize();
-        console.log('Uploading...');
-        console.log('data:'+$('#frmUploadLogo').serialize());
+   
+  
     }
 
     $scope.DeleteCompany = function(){
@@ -392,7 +384,7 @@ function CompanyEditCtrl($scope,$routeParams,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
+  
                 if(data>1){
                     $scope.company.idCompanyID = data;
                 }else if(data==1){
@@ -414,7 +406,6 @@ function CompanyEditCtrl($scope,$routeParams,$http){
         success(function(data, status) {
             $scope.status = status;
             $scope.data = data;
-            console.log(data);
             $scope.company = data;
         })
         .
@@ -435,7 +426,6 @@ function UserSurveyCtrl($scope,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
                 $scope.surveys = data;
             })
             .
@@ -494,7 +484,7 @@ function LoginCtrl($scope,$http,$cookies){
 
     $scope.Login = function(){
 
-        console.log("attempting login with "+$scope.LogInUserID);
+ 
         $http.post($scope.url, { "sUserID":$scope.LogInUserID,"sPassword":$scope.LogInUserPWD }).
             success(function(data, status) {
                 $scope.status = status;
@@ -529,7 +519,7 @@ function SurveyAdminCtrl($scope,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
+
                 $scope.surveys = data;
 
             })
@@ -550,15 +540,15 @@ function SurveyAdminCtrl($scope,$http){
 
     $scope.CreateSurvey = function(){
         if($scope.NewSurveyCompany >0){
-            console.log("Adding New Survey");
+
             $http.post($scope.url, { "criteria":"NewSurvey","data" : $scope.NewSurveyCompany}).
                 success(function(data, status) {
                     $scope.status = status;
                     if(data > 0){
-                        console.log("new survey ID ="+data);
+
                         window.location.href = '#/survey/'+data;
                     }else{
-                        console.log("Could not add new survey");
+
                         $scope.$root.ErrorMessage = "Could not add new survey";
                     }
                 })
@@ -568,7 +558,6 @@ function SurveyAdminCtrl($scope,$http){
                     $scope.status = status;
                 });
         }else{
-            console.log("No Survey Chosen");
             $scope.$root.ErrorMessage = "Please select a company to create a survey for.";
         }
     }
@@ -583,7 +572,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
     $scope.surveyID = $routeParams.surveyID;
     $scope.url = './php/SurveyController.php';
 
-    console.log($scope.ShowEditSurveyButtons);
+
     $scope.activeQuestion = 0;
     $scope.ActiveTriggerQuestion = null;
     $scope.ActiveLanguage = "ENGLISH";
@@ -598,7 +587,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
             success(function(data, status) {
                 $scope.status = status;
                 $scope.data = data;
-                console.log(data);
+
                 data.pop();
                 $scope.copysurveys = data;
             })
@@ -651,7 +640,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
 
     $scope.SetActiveQuestion = function(inputQuestion){
         $scope.activeQuestion = inputQuestion;
-        console.log($scope.activeQuestion.idQuestionID);
+
     }
 
     $scope.GetActiveQuestionAnswers = function(itemToFilter){
@@ -662,7 +651,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
     }
 
     $scope.updateTriggerQuestion = function(newTriggerQuestion){
-        console.log('new trigger');
+
         $scope.ActiveTriggerQuestion = newTriggerQuestion;
     }
 
@@ -686,7 +675,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
         $http.post("./php/SurveyController.php", { "criteria":"BlankQuestion","data" : $scope.surveyID,"language":"ALL"}).
             success(function(data, status) {
                 $scope.status = status;
-                console.log("AddQuestion".data);
+
                 var BlankQuestion = data;
                 BlankQuestion.iQuestionOrder = $scope.survey.qcQuestions.length + 1;
                 $scope.survey.qcQuestions.push(BlankQuestion);
@@ -698,12 +687,10 @@ function SurveyEditCtrl($scope,$routeParams,$http){
             });
     }
     $scope.AddNewAnswer = function(question){
-        console.log("ADD NEW ANSWER HIT");
         if(question.sQuestionType!="Textbox"){
             $http.post("./php/SurveyController.php", { "criteria":"BlankAnswer","data" : question.idQuestionID,"surveyID":question.idSurvey,"language":"ALL"}).
                 success(function(data, status) {
                     $scope.status = status;
-                    console.log("NEW ANSWER DATA:"+data);
                     question.aAnswers.push(data);
                 })
                 .
@@ -721,18 +708,18 @@ function SurveyEditCtrl($scope,$routeParams,$http){
             //delete from db
             for(var i=0;i<$scope.survey.qcQuestions.length;i++){
                 if($scope.survey.qcQuestions[i].idQuestionID == question.idQuestionID){
-                    console.log("FOUND QUESTION...DELETING"+i);
+                    
                     var questionIndex=i;
                     $http.post("./php/SurveyController.php", { "criteria":"DeleteQuestion","data" : question.idQuestionID}).
                         success(function(data, status) {
                             $scope.status = status;
                             if(data="SUCCESS"){
-                                console.log('Delete Success'+questionIndex);
+                                
 
                                 $scope.survey.qcQuestions.splice(questionIndex,1);
                             }else{
                                 $scope.$root.ErrorMessage = "Could Not Delete Question";
-                                console.log("Response: Could Not Delete Question");
+                               
                             }
                         })
                         .
@@ -740,8 +727,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
                             $scope.data = data || "Request failed";
                             $scope.status = status;
                             $scope.$root.ErrorMessage = "Could Not Delete Question";
-                            console.log("Could Not Delete Question");
-                        });
+                       });
                 }
             }
         }else
@@ -760,8 +746,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
         if(answer.idAnswerID>0){
             //delete it from db
             for(var i=0;i<question.aAnswers.length;i++){
-                console.log("DELETE Answer: looping through questions"+i);
-                console.log("DELETE Answer: "+question.aAnswers[i].idAnswerID+"/"+answer.idAnswerID);
+               
                 if(question.aAnswers[i].idAnswerID ==answer.idAnswerID && question.aAnswers[i].sAnswerText==answer.sAnswerText){
                     var AnswerIndex= i; //save it to a different variable in case the POST doesn't come back before i increments
                     $http.post("./php/SurveyController.php", { "criteria":"DeleteAnswer","data" : answer.idAnswerID}).
@@ -771,24 +756,21 @@ function SurveyEditCtrl($scope,$routeParams,$http){
                                 question.aAnswers.splice(AnswerIndex,1);
                             }else{
                                 $scope.$root.ErrorMessage = "Could Not Delete Answer";
-                                console.log("Response: Could Not Delete Answer");
-                            }
+                                                            }
                         })
                         .
                         error(function(data, status) {
                             $scope.data = data || "Request failed";
                             $scope.status = status;
                             $scope.$root.ErrorMessage = "Could Not Delete Answer";
-                            console.log("Could Not Delete Answer");
-                        });
+                                                    });
                     return;
                 }
             }
         }else{
             //just remove from the array
             for(var i=0;i<question.aAnswers.length;i++){
-                console.log("DELETE Answer: looping through questions"+i);
-                console.log("DELETE Answer: "+question.aAnswers[i].idAnswerID+"/"+answer.idAnswerID);
+                
                 if(question.aAnswers[i].idAnswerID ==answer.idAnswerID && question.aAnswers[i].sAnswerText==answer.sAnswerText){
                     question.aAnswers.splice(i,1);
                     return;
@@ -823,8 +805,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
     }
     $scope.QuestionOrderDown = function(question)
     {
-        console.log("Down");
-        for(var i=0;i<$scope.survey.qcQuestions.length;i++){
+                for(var i=0;i<$scope.survey.qcQuestions.length;i++){
             if($scope.survey.qcQuestions[i].iQuestionOrder == parseFloat(question.iQuestionOrder)+1){
                 $scope.survey.qcQuestions[i].iQuestionOrder = question.iQuestionOrder;
                 question.iQuestionOrder++;

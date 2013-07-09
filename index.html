@@ -46,12 +46,13 @@
     </script>
     <script src="js/angular.js"></script>
     <script src="js/angular-cookies.js"></script>
+    <script type="text/javascript" src="js/sanitize.js"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/app.js?v=0.0.5"></script>
-    <script src="js/controllers.js?v=0.0.5"></script>
-    <script src="js/TakeSurvey.js"></script>
+    <script src="js/app.js?v=0.0.6"></script>
+    <script src="js/controllers.js?v=0.0.6"></script>
+    <script src="js/TakeSurvey.js?v=0.0.8"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular-sanitize.min.js"></script>
+
 
 </head>
 <body ng-cloak class="ng-cloak">
@@ -78,7 +79,7 @@
 
         <div class="row">
             <div class="span2 Sidebar" ng-show="LoggedInUser">
-                <img ng-src="{{LoggedInUser.urlCompanyLogo}}" style="max-width: 100%; padding-top: 10px; max-height:300px;"/>
+                <img ng-src="{{LoggedInUser.urlCompanyLogo}}" style="max-width: 80%; padding-top: 10px; max-height:300px;"/>
                 <ul class="nav nav-list" ng-show="LoggedInUser.iRole < 3">
                     <li class="nav-header">Menu</li>
                     <li><a href="./#/home">Home</a></li>
@@ -121,7 +122,10 @@
     </div>
     <script type="text/javascript" src="https://www.google.com/jsapi"> </script>
     <script type="text/javascript">
-        google.load('visualization', '1.0', { 'packages': ['corechart'] });
+        if(typeof(google)!=='undefined'){
+            google.load('visualization', '1.0', { 'packages': ['corechart'] });
+        }
+
     </script>
 </body>
 </html>

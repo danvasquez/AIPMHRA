@@ -11,11 +11,9 @@
         <ol>
             <li ng-repeat="question in survey.qcQuestions" class="well">
                 <strong>{{question.sText}}</strong>
-                <p>
-                    You answered: <em>{{question.sUsersAnswerText}}</em>
-                </p>
+                
                 <div class="RiskFactor" ng-show="question.sUserRiskFactor.length">
-                    <div><span class="icon-comment"></span> About that:</div>
+                    
                     <p ng-bind-html-unsafe="question.sUserRiskFactor">
 
                     </p>

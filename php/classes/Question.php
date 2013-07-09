@@ -27,9 +27,9 @@ class Question
     public $resultsStats = array();
     public $iIsTrigger = 0;
 
-    public $idUsersAnswer = 0; //the id of the user's selected answer. Current or Previously saved
-    public $sUsersAnswerText="";
-    public $sUserRiskFactor="";
+    public $idUsersAnswer = []; //the id of the user's selected answer. Current or Previously saved
+    public $sUsersAnswerText=[];
+    public $sUserRiskFactor=[];
 
     public $ActiveLanguage="ENGLISH";
 
@@ -72,17 +72,17 @@ class Question
 
         foreach($result as $row){
             error_log("SETTING User ANSWER ".$row['answer'].$this->idQuestionID."|".$this->idUserID);
-            $this->idUsersAnswer = $row['answer'];
+            $this->idUsersAnswer[] = $row['answer'];
 
             $usersAnswer = new Answer($row['answer'],$this->ActiveLanguage);
 
             if($this->sQuestionType!="Textbox"){
-                $this->sUsersAnswerText = $usersAnswer->sAnswerText;
+                $this->sUsersAnswerText[] = $usersAnswer->sAnswerText;
             }else{
-               $this->sUsersAnswerText = $row['text'];
+               $this->sUsersAnswerText[] = $row['text'];
             }
 
-            $this->sUserRiskFactor = $usersAnswer->sRiskFactorText;
+            $this->sUserRiskFactor[] = $usersAnswer->sRiskFactorText;
 
         }
     }
@@ -131,12 +131,12 @@ class Question
 
     }
 
-    public function SaveUserAnswer($_userID=0,Answer $answer){
+    public function SaveUserAnswer($_userID=0,Answer $answer,$qType){
         $params="";
         $sql=null;
         if($_userID>0){
-
-            $xquery = "SELECT id from userdata where question=:questionid and user=:userid";
+		
+	    $xquery = "SELECT id from userdata where question=:questionid and user=:userid";
             $xparams = array(':questionid'=>$answer->idQuestionID,':userid'=>$_userID);
 
             $sql = new SQLConnection();
@@ -146,16 +146,17 @@ class Question
             foreach($xresult as $xrow){
                 $IsNew=$xrow['id'];
             }
-
-            if($IsNew>0){
+            
+		if($qType=="checkbox"){$IsNew=0;}
+	if($IsNew>0){
                 $query = "UPDATE userdata SET answer=:answerid,text=:answertext,survey=:surveyid WHERE question=:questionid and user=:userid";
             }else{
                 $query = "INSERT INTO userdata (answer,question,user,text,survey) VALUES (:answerid,:questionid,:userid,:answertext,:surveyid)";
             }
 
             $userText=$answer->sAnswerText;
-            error_log("text answer:".$answer->sAnswerText);
-            error_log("text user answer:".$this->sUsersAnswerText);
+            
+            
             if($this->sUsersAnswerText!=""){
                 $userText = $this->sUsersAnswerText;
             }
