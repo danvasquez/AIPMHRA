@@ -20,7 +20,12 @@ foreach (glob("/var/www/ha/AIPMHRA/php/classes/*.php") as $filename)
 class SqlConnectionTest extends PHPUnit_Framework_TestCase{
 
 	public function testLoadClass(){
-		$this->assertEquals(1,1);
+		$sql = new SQLConnection();
+		$this->assertInstanceOf("SQLConnection",$sql);
+	}
+
+	public function testSelectQuery(){
+
 	}
 
 }

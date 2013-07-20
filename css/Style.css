@@ -1,6 +1,20 @@
+.accordion-heading span{
+	float: left;
+	display: inline;
+	vertical-align: middle;
+	height: 20px;
+	line-height: 20px;
+	padding-top: 8px;
+	padding-right:10px;
+}
+
 body{
     padding-top: 40px; /*because of fixed top navbar */
     background-color: #353634;
+}
+
+button{
+	margin: 5px !important;
 }
 
 .container{
@@ -8,327 +22,335 @@ body{
     padding-top: 0px !important;
 }
 
-li{
-    list-style-type: none;
-}
+.container{
+	margin-top:40px;
+	background-color: #ffffff;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	-moz-border-radius-bottomright: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 
-h1{
-    font-size: 20px!important;
-}
-.navbar{
-    font-size:20px !important;
-}
-.surveyTableTR:hover{
-    text-decoration: underline;
-    font-weight: 400;
-    cursor: pointer;
-}
-.userSurveyTable td{
-    font-size: 18px;
-    color:#191970;
-}
-
-.FinishedBanner{
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    border:2px solid #000000;
-    background-color: #fbf48b;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.nav-textOnly{
-    height: 80px;
-    line-height: 80px;
-    vertical-align: middle;
-    font-weight: 300;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 26px;
-}
-.EditSurveyMainInfo{
-    text-align: center;
-}
-span{
-    font-weight: bold;
-}
-.footer{
-
-    -moz-border-radius-bottomleft: 15px;
-    -moz-border-radius-bottomright: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-   background-color: #ebe5ea;
-   text-align: center;
-    border-bottom: 1px solid black;
-    border-top:1px solid black;
-}
-.Sidebar{
-    /*position: fixed;*/
-    text-align: center;	
-}
-
-.Sidebar .nav{
-    margin-top:50px;
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
 }
 
 .Content{
-   /* margin-left: 16.167% !important; */
+	/* margin-left: 16.167% !important; */
 }
 
-.loginh1{
-    font-size: 44px!important;
-    font-weight: 300;
-    font-family: 'Open Sans Condensed', sans-serif;
-}
-
-.container{
-    margin-top:40px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    -moz-border-radius: 15px;
-    -moz-border-radius-bottomleft: 15px;
-    -moz-border-radius-bottomright: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-
-    border-left:1px solid #000000;
-    border-right:1px solid #000000;
-}
-button{
-    margin: 5px !important;
-}
-.icon-arrow-up,.icon-arrow-down{
-    cursor: pointer;
-}
-.icon-arrow-up + em{
-    font-size: 2em;
-    font-style: normal;
-}
-strong{
-    display:block;
-}
-.accordion-heading span{
-    float: left;
-    display: inline;
-    vertical-align: middle;
-    height: 20px;
-    line-height: 20px;
-    padding-top: 8px;
-    padding-right:10px;
-}
-ol.olAnswerList li{
-    border-bottom: 1px solid #000000;
-}
-th{
-    text-align: left;
-}
-
-.Inline{
-    display:inline;
-}
-.nav-list{
-    /* text-align: right; */
-    text-align: left;
-}
-.nav-header{
-    text-align: center;
-}
 .companyTable td{
-    line-height: 40px !important;
-    height: 40px !important;
-    padding: 0px !important;
+	line-height: 40px !important;
+	height: 40px !important;
+	padding: 0px !important;
 }
 .companyTable img{
-    max-height: 40px;
+	max-height: 40px;
 }
 
-#loading{
-    font-size: 20px;
+.EditSurveyMainInfo{
+	text-align: center;
 }
 
-.input-help {
-    display: none;
-
-    z-index: 100;
-    top: -6px;
-    left: 160px;
-    width:200px;
-    padding:10px;
-    background:#fefefe;
-    font-size:.875em;
-    border-radius:5px;
-    box-shadow:0 1px 3px #aaa;
-    border:1px solid #ddd;
-    opacity: 0.9;
-}
-.input-help::before {
-    content: "\25C0";
-    position: absolute;
-    top:10px;
-    left:-12px;
-    font-size:16px;
-    line-height:16px;
-    color:#ddd;
-    text-shadow:none;
-}
-.input-help h4 {
-    margin:0;
-    padding:0;
-    font-weight: normal;
-    font-size: 1.1em;
+.FinishedBanner{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	border:2px solid #000000;
+	background-color: #fbf48b;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
-/* Always hide the input help when it's pristine */
-input.ng-pristine + .input-help {
-    display: none;
+form .btn, form.ng-valid .btn[disabled] {
+	display: none;
 }
 
-/* Hide the invalid box while the input has focus */
-.ng-invalid:focus + .input-help {
-    display: none;
+form.ng-invalid .btn[disabled], form.ng-valid .btn {
+	display: inline-block;
+}
+
+.footer{
+
+	-moz-border-radius-bottomleft: 15px;
+	-moz-border-radius-bottomright: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	background-color: #ebe5ea;
+	text-align: center;
+	border-bottom: 1px solid black;
+	border-top:1px solid black;
+}
+
+h1{
+	font-size: 20px!important;
+}
+
+.icon-arrow-up,.icon-arrow-down{
+	cursor: pointer;
+}
+
+.icon-arrow-up + em{
+	font-size: 2em;
+	font-style: normal;
+}
+
+/* Show the help box once it has focus */
+.immediate-help:focus + .input-help {
+	display: block;
+}
+
+/* Immediate help should be red when pristine */
+.immediate-help.ng-pristine:focus + .input-help {
+	border-color:#ec3f41;
+}
+.immediate-help.ng-pristine:focus + .input-help::before {
+	color:#ec3f41;
+}
+
+
+.Inline{
+	display:inline;
 }
 
 /* Show a blue border while an input has focus, make sure it overrides everything else */
 /* Overriding Twitter Bootstrap cuz I don't agree we need to alarm the user while they're typing */
 input:focus {
-    color: black !important;
-    border-color: rgba(82, 168, 236, 0.8) !important;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+	color: black !important;
+	border-color: rgba(82, 168, 236, 0.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
 }
 
-
-/* Show green border when stuff has been typed in, and its valid */
-.ng-dirty.ng-valid {
-    border-color:#3a7d34;
-}
-
-/* Show red border when stuff has been typed in, but its invalid */
-.ng-dirty.ng-invalid {
-    border-color:#ec3f41;
-}
-
-/* Show the help box once it has focus */
-.immediate-help:focus + .input-help {
-    display: block;
-}
-
-/* Immediate help should be red when pristine */
-.immediate-help.ng-pristine:focus + .input-help {
-    border-color:#ec3f41;
-}
-.immediate-help.ng-pristine:focus + .input-help::before {
-    color:#ec3f41;
-}
-
-/* Help hould be green when input is valid */
-.ng-valid + .input-help {
-    border-color:#3a7d34;
-}
-.ng-valid + .input-help::before {
-    color:#3a7d34;
-}
-
-/* Help should show and be red when invalid */
-.ng-invalid + .input-help {
-    display: block;
-    border-color: #ec3f41;
-}
-.ng-invalid + .input-help::before {
-    color: #ec3f41;
-}
 
 /* Style input help requirement bullets */
 .input-help ul {
-    list-style: none;
-    margin: 10px 0 0 0;
+	list-style: none;
+	margin: 10px 0 0 0;
 }
 
 /* Default each bullet to be invalid with a red cross and text */
 .input-help li {
-    padding-left: 22px;
-    line-height: 24px;
-    color:#ec3f41;
-    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAA1CAYAAABIkmvkAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAJwAAACcBKgmRTwAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8wOS8xMlhq+BkAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAEA0lEQVRIie2WW2jbVRzHv//zT5rkn0ub61zaNdEiPqTC9EFRhtgJk63qg3Wr0806pswNiYgDUXxwyryCEB8UBevtaSCCDHQoboKyoVvVzfRmL2napU0mrdbl8s//dy4+dM1M28n64FsPnIdz+XzO75zfOXA0pRRWU7o/uS9FxOc+3/vlIQBgq4F3fHxvKuIPJ9cFwi9uTXU8BwDa1Uaw/aN7UusCkWRbPI5yxcTI2Bgy49kXrkrwwIedqYg/nGyLXwsJiYHBYWTGs7Cq5Kpt4cA3PXft+2rX40vhrt7OVLgplIzHYuBKoH9gCKMjGVE1LdfJl86YDAAOfN2ziZP4NODyv9/z2fanFuH7P9iWCjcFk/FYK4QSGLgEk0WeUy/3mQCgPXFs9xbBRW883NrssDvQN3hWcOLPEPGWiD94MBaPQymBoaERjI9mBSfu+fHwL+biItpjR3e6JFfloDeAaGQ9SpUycvlp6ExHJBKGYsDvgyMYH81KTsL90yuX4VoWdh3pMqSQpWBjAC3RZkgpYEkCFDA8NIqJ0UlFxI3Tr/5aB9elsau305BcloKBAFpjLeBSYGRwDBNjk4oTN06/dnYZXCcAgK1vbzYkl6VwOATihOzYlOLEjTOvn1sRXiYAgDsP32YIKUuWaXFOwtP3xrnqleAVBQBwy/M3GZy4+PnN3/4TvqJgNWVVj2lNsCZYE6wJ1gRrgv9dYAMAHHw2Bl2fUEpBVavtLPVW/78nVR/Zk4CupzVHA6zChSOK0yHv0S8GFyK4BMPhAJxOgLE03/9kYhE2dz+agKaldY8bDaEQ7D5ft7Roy+UIlCooy5LQdaZ5vVBEgGmmrT172yVxaIylmdcDm9cHc2oK1Zm8kETvLAo0pRRk8mmnEqKouVw68zVCzP8F/uccFHHoXi/sjT6Y53Mw83mhOHn8J7416wQAwPftd0ouiswwdJu/CRASkBKQAmYuBzNfWIC/O173W6llwfbeu6Yi8tDsrAQJYGICyGQAIWDO5KUkaxlcJwAASdSmaWAQHCACOAc4h6YzJi1qWymNNUHlwYcT0JDWXQbACYhGgeh6gHM4Ghuh2/R0YePNiaUCTSmFcvdDCY1paZvhht3nQ2VmGmahICSR5vQHmDt6DcozeZSnp2FdLLZHhwdq94SVd+xMaJqWtrkM2L1uVHILpy0t8igidymXExfHMzBCQbhCIdga7Onz8etqkdgkUYTZbYCSqORmULlQEIq4J3jyexMA8jdu9BRzuaKyLN3udkNjDEqICID+2hbm797Wwez24/T3vJTE3aFTP9Sd9vT1NziVEMUGr1c35+Y2b5jKnqgNKqWglMLspjs6/rj1dudie2mdao07J5s3dCzt/werJTyI1yYqpQAAAABJRU5ErkJggg==) no-repeat  2px -34px;
-}
-
-#loginLink:hover {
-    cursor: pointer;
+	padding-left: 22px;
+	line-height: 24px;
+	color:#ec3f41;
+	background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAA1CAYAAABIkmvkAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAJwAAACcBKgmRTwAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8wOS8xMlhq+BkAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAEA0lEQVRIie2WW2jbVRzHv//zT5rkn0ub61zaNdEiPqTC9EFRhtgJk63qg3Wr0806pswNiYgDUXxwyryCEB8UBevtaSCCDHQoboKyoVvVzfRmL2napU0mrdbl8s//dy4+dM1M28n64FsPnIdz+XzO75zfOXA0pRRWU7o/uS9FxOc+3/vlIQBgq4F3fHxvKuIPJ9cFwi9uTXU8BwDa1Uaw/aN7UusCkWRbPI5yxcTI2Bgy49kXrkrwwIedqYg/nGyLXwsJiYHBYWTGs7Cq5Kpt4cA3PXft+2rX40vhrt7OVLgplIzHYuBKoH9gCKMjGVE1LdfJl86YDAAOfN2ziZP4NODyv9/z2fanFuH7P9iWCjcFk/FYK4QSGLgEk0WeUy/3mQCgPXFs9xbBRW883NrssDvQN3hWcOLPEPGWiD94MBaPQymBoaERjI9mBSfu+fHwL+biItpjR3e6JFfloDeAaGQ9SpUycvlp6ExHJBKGYsDvgyMYH81KTsL90yuX4VoWdh3pMqSQpWBjAC3RZkgpYEkCFDA8NIqJ0UlFxI3Tr/5aB9elsau305BcloKBAFpjLeBSYGRwDBNjk4oTN06/dnYZXCcAgK1vbzYkl6VwOATihOzYlOLEjTOvn1sRXiYAgDsP32YIKUuWaXFOwtP3xrnqleAVBQBwy/M3GZy4+PnN3/4TvqJgNWVVj2lNsCZYE6wJ1gRrgv9dYAMAHHw2Bl2fUEpBVavtLPVW/78nVR/Zk4CupzVHA6zChSOK0yHv0S8GFyK4BMPhAJxOgLE03/9kYhE2dz+agKaldY8bDaEQ7D5ft7Roy+UIlCooy5LQdaZ5vVBEgGmmrT172yVxaIylmdcDm9cHc2oK1Zm8kETvLAo0pRRk8mmnEqKouVw68zVCzP8F/uccFHHoXi/sjT6Y53Mw83mhOHn8J7416wQAwPftd0ouiswwdJu/CRASkBKQAmYuBzNfWIC/O173W6llwfbeu6Yi8tDsrAQJYGICyGQAIWDO5KUkaxlcJwAASdSmaWAQHCACOAc4h6YzJi1qWymNNUHlwYcT0JDWXQbACYhGgeh6gHM4Ghuh2/R0YePNiaUCTSmFcvdDCY1paZvhht3nQ2VmGmahICSR5vQHmDt6DcozeZSnp2FdLLZHhwdq94SVd+xMaJqWtrkM2L1uVHILpy0t8igidymXExfHMzBCQbhCIdga7Onz8etqkdgkUYTZbYCSqORmULlQEIq4J3jyexMA8jdu9BRzuaKyLN3udkNjDEqICID+2hbm797Wwez24/T3vJTE3aFTP9Sd9vT1NziVEMUGr1c35+Y2b5jKnqgNKqWglMLspjs6/rj1dudie2mdao07J5s3dCzt/werJTyI1yYqpQAAAABJRU5ErkJggg==) no-repeat  2px -34px;
 }
 
 /* Set to green check and text when valid */
 .input-help li.valid {
-    color:#3a7d34;
-    background-position: 2px 6px;
+	color:#3a7d34;
+	background-position: 2px 6px;
 }
 
-/* Set submit button */
-form .btn, form.ng-valid .btn[disabled] {
-    display: none;
+/* Always hide the input help when it's pristine */
+input.ng-pristine + .input-help {
+	display: none;
 }
-form.ng-invalid .btn[disabled], form.ng-valid .btn {
-    display: inline-block;
+
+.input-help {
+	display: none;
+
+	z-index: 100;
+	top: -6px;
+	left: 160px;
+	width:200px;
+	padding:10px;
+	background:#fefefe;
+	font-size:.875em;
+	border-radius:5px;
+	box-shadow:0 1px 3px #aaa;
+	border:1px solid #ddd;
+	opacity: 0.9;
 }
-.SidebarQuestions{
-    padding:3px;
-    text-align: left;
-    width:100%;
-    background-color: #bfbfbf;
-    border-collapse: collapse;
-    border:1px solid #151515;
+.input-help::before {
+	content: "\25C0";
+	position: absolute;
+	top:10px;
+	left:-12px;
+	font-size:16px;
+	line-height:16px;
+	color:#ddd;
+	text-shadow:none;
 }
-.SidebarQuestions:hover{
-    background-color: #ffffff;
+.input-help h4 {
+	margin:0;
+	padding:0;
+	font-weight: normal;
+	font-size: 1.1em;
 }
-.UserSurveyResults h1{
-        font-size:26px;
-}
-.UserSurveyResults h2{
-    font-size:22px;
-}
-.UserSurveyResults li strong{
-    font-size: 120%;
-}
-.UserSurveyResults li p{
-    font-size:100%;
-    color:gray;
-    padding:10px;
-}
-.UserSurveyResults li em{
-    font-style:normal;
-    font-size:110%;
-    color:black;
-}
-.RiskFactor{
-    padding:5px;
-    color: black!important;
-}
+
+
 
 .languageOption{
-    display:inline;
-    text-decoration: underline;
-    color:#191970;
-    padding:10px;
+	display:inline;
+	text-decoration: underline;
+	color:#191970;
+	padding:10px;
 }
 .languageOption:hover{
-    cursor: pointer;
+	cursor: pointer;
+}
+
+
+li{
+    list-style-type: none;
+}
+
+.loginh1{
+	font-size: 44px!important;
+	font-weight: 300;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+#loading{
+	font-size: 20px;
+}
+
+#loginLink:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+ol.olAnswerList li{
+	border-bottom: 1px solid #000000;
+}
+
+.navbar{
+    font-size:20px !important;
+}
+
+.nav-textOnly{
+	height: 80px;
+	line-height: 80px;
+	vertical-align: middle;
+	font-weight: 300;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 26px;
+}
+
+.nav-list{
+	/* text-align: right; */
+	text-align: left;
+}
+.nav-header{
+	text-align: center;
+}
+
+/* Show green border when stuff has been typed in, and its valid */
+.ng-dirty.ng-valid {
+	border-color:#3a7d34;
+}
+
+/* Show red border when stuff has been typed in, but its invalid */
+.ng-dirty.ng-invalid {
+	border-color:#ec3f41;
+}
+
+/* Hide the invalid box while the input has focus */
+.ng-invalid:focus + .input-help {
+	display: none;
+}
+
+/* Help hould be green when input is valid */
+.ng-valid + .input-help {
+	border-color:#3a7d34;
+}
+.ng-valid + .input-help::before {
+	color:#3a7d34;
+}
+
+/* Help should show and be red when invalid */
+.ng-invalid + .input-help {
+	display: block;
+	border-color: #ec3f41;
+}
+.ng-invalid + .input-help::before {
+	color: #ec3f41;
+}
+
+.RiskFactor{
+	padding:5px;
+	color: black!important;
 }
 
 .ResultsUserStats{
-    padding:10px;
+	padding:10px;
 }
 .ResultsQuestionText{
-    font-style:italic;
-    padding:20px;
-    font-size:130%;
-}
-.white{
-    background-color: #ffffff!important;
+	font-style:italic;
+	padding:20px;
+	font-size:130%;
 }
 
-.QuestionPreamble{
-    
+.Sidebar{
+	/*position: fixed;*/
+	text-align: center;
+}
+
+.Sidebar .nav{
+	margin-top:50px;
+}
+
+.surveyTableTR:hover{
+    text-decoration: underline;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+span{
+	font-weight: bold;
+}
+
+strong{
+	display:block;
+}
+
+.SidebarQuestions{
+	padding:3px;
+	text-align: left;
+	width:100%;
+	background-color: #bfbfbf;
+	border-collapse: collapse;
+	border:1px solid #151515;
+}
+
+.SidebarQuestions:hover{
+	background-color: #ffffff;
+}
+
+th{
+	text-align: left;
+}
+
+.userSurveyTable td{
+    font-size: 18px;
+    color:#191970;
+}
+
+.UserSurveyResults h1{
+	font-size:26px;
+}
+.UserSurveyResults h2{
+	font-size:22px;
+}
+.UserSurveyResults li strong{
+	font-size: 120%;
+}
+.UserSurveyResults li p{
+	font-size:100%;
+	color:gray;
+	padding:10px;
+}
+.UserSurveyResults li em{
+	font-style:normal;
+	font-size:110%;
+	color:black;
+}
+
+.white{
+    background-color: #ffffff!important;
 }
 
 @media print {
