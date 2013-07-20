@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-require_once("./dompdf/dompdf_config.inc.php");
+require_once("/var/www/ha/AIPMHRA/php/dompdf/dompdf_config.inc.php");
 
 class PDFCreator {
 
