@@ -606,7 +606,6 @@ function SurveyEditCtrl($scope,$routeParams,$http){
             $scope.divCopySurvey = true;
             $scope.GetSurveysToCopy();
         }
-
     }
 
     $scope.copySurvey = function($copySurveyID){
