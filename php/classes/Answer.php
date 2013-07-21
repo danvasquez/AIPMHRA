@@ -25,27 +25,50 @@ class Answer
     public $iUsersAnswered = 0;
     public $idTriggers =-1; //if > 0 , then this answer triggers another question
 
-    function Answer($_answerID = 0,$_language="ENGLISH"){
+	private $SqlConnection;
+
+	/**
+	 * CONSTRUCTOR
+	 * @param int $_answerID
+	 * @param string $_language
+	 */
+	function __construct($_answerID = 0,$_language="ENGLISH",$_sqlConnection=null){
+
+		if(!isset($_sqlConnection) || $_sqlConnection==null){
+			$this->SqlConnection = new SQLConnection();
+		}else{
+			$this->SqlConnection = $_sqlConnection;
+		}
+
        $this->idAnswerID = $_answerID;
        $this->ActiveLanguage = $_language;
        $this->GetAnswerInfo();
-       $this->GetResults();
+       $this->iUsersAnswered = $this->GetResults($this->SqlConnection);
     }
 
-    public function GetResults(){
+	/**
+	 * Gets the number of people who have answered the parent question with this answer
+	 * @return int
+	 */
+	public function GetResults($sqlConnection){
         $query = "SELECT count(user) as num from userdata where answer=:answerid";
         $params = array(':answerid'=>$this->idAnswerID);
-        $sql = new SQLConnection();
 
-        $results = $sql->DoSelectQuery($query,$params);
-        foreach($results as $row){
-            $this->iUsersAnswered = $row['num'];
+        $results = $sqlConnection->DoSelectQuery($query,$params);
+		$x=0;
+
+		foreach($results as $row){
+            $x = $row['num'];
         }
+		return $x;
     }
 
-    public function GetAnswerInfo(){
-        $sql = new SQLConnection();
-        $result = $sql->DoSelectQuery("SELECT * FROM answers WHERE id=".$this->idAnswerID);
+	/**
+	 *
+	 */
+	public function GetAnswerInfo(){
+
+        $result = $this->SqlConnection->DoSelectQuery("SELECT * FROM answers WHERE id=".$this->idAnswerID);
         foreach ($result as $row){
             $this->idSurveyID = $row['survey'];
             $this->idQuestionID = $row['question'];

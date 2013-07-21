@@ -33,7 +33,13 @@ class Question
 
     public $ActiveLanguage="ENGLISH";
 
-    function __construct($_questionID = 0,$_language="ENGLISH",$_userid=0){
+	/**
+	 * CONSTRUCTOR
+	 * @param int $_questionID
+	 * @param string $_language
+	 * @param int $_userid
+	 */
+	function __construct($_questionID = 0,$_language="ENGLISH",$_userid=0){
         $this->idUserID = $_userid;
         $this->idQuestionID = $_questionID;
         $this->ActiveLanguage = $_language;
@@ -44,7 +50,10 @@ class Question
 
     }
 
-    public function CheckIsTrigger(){
+	/**
+	 * check if a question is the trigger and set the id of the triggered question if so
+	 */
+	public function CheckIsTrigger(){
         $query = "SELECT id FROM answers WHERE triggers=:triggerid";
         $params = array(':triggerid'=>$this->idQuestionID);
         $sql = new SQLConnection();
@@ -54,9 +63,13 @@ class Question
         }
     }
 
-    public function MakeStatsArray(){
+	/**
+	 *
+	 */
+	public function MakeStatsArray(){
         $counter=0;
 
+		//loop through the answers
         foreach($this->aAnswers as $answer){
             $x = Array($answer->sAnswerText,$answer->iUsersAnswered);
             $this->resultsStats[] = $x;
