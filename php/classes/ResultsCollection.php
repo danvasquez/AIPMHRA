@@ -58,7 +58,6 @@ class ResultsCollection
 
             $result = $sql->DoSelectQuery($query,$params);
             foreach($result as $row){
-                error_log("user count from sql=".$row['num']." from php ".$this->numberOfQuestions);
                 if($row['num']>=$this->numberOfQuestions){
                     $this->usersCompleted[] = $u;
                 }
