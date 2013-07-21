@@ -610,6 +610,7 @@ function SurveyEditCtrl($scope,$routeParams,$http){
 
 	$scope.CopyQuestions = function(copySurveyID){
 		console.log(copySurveyID);
+
 	}
 
     $scope.copySurvey = function($copySurveyID){

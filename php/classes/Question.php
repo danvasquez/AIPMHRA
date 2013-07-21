@@ -249,7 +249,6 @@ class Question
     public function GetAnswers(){
         $sql = new SQLConnection();
         $result = $sql->DoSelectQuery("SELECT id FROM answers WHERE question=".$this->idQuestionID." AND survey=".$this->idSurvey);
-        error_log("ANSWERQUERY:"."SELECT id FROM answers WHERE question=".$this->idQuestionID." AND survey=".$this->idSurvey);
         foreach ($result as $row){
             $this->aAnswers[] = new Answer($row['id'],$this->ActiveLanguage);
         }
