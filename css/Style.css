@@ -53,6 +53,10 @@ button{
 	text-align: center;
 }
 
+.EditSurvey .btn{
+	width:100%;
+}
+
 .FinishedBanner{
 	border-radius: 10px;
 	-moz-border-radius: 10px;
