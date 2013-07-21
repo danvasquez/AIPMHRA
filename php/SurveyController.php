@@ -112,7 +112,7 @@ switch($objData->criteria){
     case "SaveUserAnswer":
         $userAnswer = $objData->data;
 	$qType = $userAnswer->sQuestionType; 
-error_log("STARTING TO SAVE::::");        
+	error_log("STARTING TO SAVE::::");
 try{
 
 	if(is_array($userAnswer->idUsersAnswer)){

@@ -29,7 +29,7 @@ class Survey
     public $sPreambleSpanish = "Survey Preamble in Spanish";
     public $ActiveLanguage = "ENGLISH";
 
-    function Survey($_iSurveyID = 0,$_language="ENGLISH",$_userID=0){
+    function __construct($_iSurveyID = 0,$_language="ENGLISH",$_userID=0){
         $this->idSurveyID = $_iSurveyID;
         $this->ActiveLanguage = $_language;
         if($this->idSurveyID>0){

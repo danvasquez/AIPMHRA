@@ -21,24 +21,20 @@ class ResultsCollection
 
     public $numberOfQuestions = 0;
 
-    function ResultsCollection($_surveyID=0){
+    function __construct($_surveyID=0){
         $this->idSurveyID = $_surveyID;
         $this->survey = new Survey($this->idSurveyID);
         $this->numberOfQuestions = count($this->survey->qcQuestions);
 
-        error_log('getting attempted users');
         //first get a list of all the users who have answered any questions
         $this->GetAttemptedUsers();
 
-        error_log('getting completed users');
         //now check and see which of these answered all the questions
         $this->GetCompletedUsers();
 
-        error_log('getting all users');
         //get the number of users available (by company);
         $this->usersAvailable = new UserCollection();
         $this->usersAvailable->GetByCompanyID($this->survey->iCompany);
-
     }
 
     public function GetAttemptedUsers(){

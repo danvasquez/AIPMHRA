@@ -33,7 +33,7 @@ class Question
 
     public $ActiveLanguage="ENGLISH";
 
-    function Question($_questionID = 0,$_language="ENGLISH",$_userid=0){
+    function __construct($_questionID = 0,$_language="ENGLISH",$_userid=0){
         $this->idUserID = $_userid;
         $this->idQuestionID = $_questionID;
         $this->ActiveLanguage = $_language;
