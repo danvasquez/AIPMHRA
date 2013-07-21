@@ -25,7 +25,7 @@
             </div>
         <div class="row">
             <div class="span5 white">
-                <div ng-show="question.sQuestionType=='option'">
+                <div ng-show="question.sQuestionType!='Textbox'">
                     <table class="table table-striped">
 
                         <thead>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="span5 white">
-                <div style="width: 95%" ng-show="question.sQuestionType=='option'" ng-model="question.resultsStats"
+                <div style="width: 95%" ng-show="question.sQuestionType!='Textbox'" ng-model="question.resultsStats"
                      qn:columns="[{type:'string', name: 'Answer'},{type:'number', name: 'Responses'}]"
                      qn:piechart="{
                 legend : {alignment: 'center'},
