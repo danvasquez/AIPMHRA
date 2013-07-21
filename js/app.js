@@ -55,6 +55,7 @@ app.run(function($rootScope,$http,$cookies,$location) {
 
     $rootScope.CheckLogin = function(req){
 
+	    $rootScope.ErrorMessage = "";
         
         if($cookies.LoggedInUserID<1){
             window.location.href="#/login";
