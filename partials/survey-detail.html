@@ -6,22 +6,11 @@
         <button class="btn btn-small" ng-show="survey.qcQuestions.length == 0" ng-click="ShowCopySurvey()">Copy Another Survey?</button>
         <div class="row" ng-show="divCopySurvey">
             <div class="span5">
-                <table id="tblSurveyTable" class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Survey</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="copysurvey in copysurveys | orderBy:orderprop " name='SurveyRow_{{survey.idSurveyID}}' class="surveyTableTR">
-                        <td>{{copysurvey.sCompanyName}}</td>
-                        <td>{{copysurvey.sTitle}}</td>
-                        <td><button class="btn" ng-click="copySurvey(copysurvey.idSurveyID)">Copy!</button></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <select ng-model="CopySelected" ng-options="c.sTitle for c in copysurveys" class="">
+
+                </select>
+				<button ng-click="CopyQuestions(CopySelected)">Copy!</button>
+	            
             </div>
         </div>
     </div>

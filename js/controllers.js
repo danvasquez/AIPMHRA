@@ -608,6 +608,10 @@ function SurveyEditCtrl($scope,$routeParams,$http){
         }
     }
 
+	$scope.CopyQuestions = function(copySurveyID){
+		console.log(copySurveyID);
+	}
+
     $scope.copySurvey = function($copySurveyID){
         var companyid = $scope.survey.iCompany;
         $http.post($scope.url, { "criteria":"CopySurvey","data" : $copySurveyID,"newID": $scope.surveyID,"companyID":companyid,"language":"ALL"}).
