@@ -3,7 +3,7 @@
         <h1>Edit Survey</h1>
     </div>
     <div class="span5">
-        <button class="btn btn-small" ng-show="survey.qcQuestions.length == 0" ng-click="ShowCopySurvey()">Copy Another Survey?</button>
+        <button class="btn btn-small"  ng-click="ShowCopySurvey()">Copy Another Survey?</button>
         <div class="row" ng-show="divCopySurvey">
             <div class="span5">
                 <select ng-model="CopySelected" ng-options="c.sTitle for c in copysurveys" class="">

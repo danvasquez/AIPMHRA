@@ -609,25 +609,36 @@ function SurveyEditCtrl($scope,$routeParams,$http){
     }
 
 	$scope.CopyQuestions = function(copySurveyID){
-		console.log(copySurveyID);
-
+		$http.post('./php/CopyController.php', {"copyFrom": copySurveyID.idSurveyID, "copyTo": $scope.surveyID}).
+			success(function(data,status){
+				console.log(data);
+				$scope.status = status;
+				$scope.data = data;
+				$scope.survey = data;
+				$scope.apply();
+			}).error(function(data,status){
+				$scope.data = data || "Request failed";
+				$scope.status = status;
+			});
 	}
 
     $scope.copySurvey = function($copySurveyID){
         var companyid = $scope.survey.iCompany;
-        $http.post($scope.url, { "criteria":"CopySurvey","data" : $copySurveyID,"newID": $scope.surveyID,"companyID":companyid,"language":"ALL"}).
-            success(function(data, status) {
-                $scope.status = status;
-                $scope.data = data;
+	    if(confirm("Are you sure you want to do this? Saying OK will copy the questions and answers from the selected survey into this one.")){
+		    $http.post($scope.url, { "criteria":"CopySurvey","data" : $copySurveyID,"newID": $scope.surveyID,"companyID":companyid,"language":"ALL"}).
+			    success(function(data, status) {
+				    $scope.status = status;
+				    $scope.data = data;
+				    $scope.survey = data;
+				    $scope.apply();
+			    })
+			    .
+			    error(function(data, status) {
+				    $scope.data = data || "Request failed";
+				    $scope.status = status;
+			    });
+	    }
 
-                $scope.survey = data;
-                $scope.apply();
-            })
-            .
-            error(function(data, status) {
-                $scope.data = data || "Request failed";
-                $scope.status = status;
-            });
     }
 
     $http.post($scope.url, { "criteria":"surveyID","data" : $scope.surveyID,"language":"ALL"}).

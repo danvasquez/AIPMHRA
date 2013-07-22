@@ -227,7 +227,7 @@ class Question
             $surveyChangeString .="textSpanish=:textSpanish ";
             $surveyChangeString .="WHERE id=".$this->idQuestionID." LIMIT 1";
         }else{
-            //brand new survey
+            //brand new quesion
 
             $surveyChangeString = "INSERT INTO questions (survey,preamble,preambleSpanish,qorder,type,text,textSpanish)";
             $surveyChangeString .=" VALUES(:survey,:preamble,:preambleSpanish,:qorder,:type,:text,:textSpanish)";
