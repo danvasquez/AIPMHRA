@@ -848,21 +848,26 @@ function SurveyEditCtrl($scope,$routeParams,$http){
         $scope.$root.ErrorMessage = "Order cleaned up!";
     }
     $scope.DeleteSurvey = function(survey){
-        $http.post("./php/SurveyController.php", { "criteria":"DeleteSurvey","data" : survey.idSurveyID}).
-            success(function(data, status) {
-                $scope.status = status;
-                if(data=="1"){
-                    $scope.$root.ErrorMessage = "Survey Deleted";
-                    window.location.href = '#/admin-surveys';
-                }else{
-                    $scope.$root.ErrorMessage =  "Could not delete survey";
-                }
-            })
-            .
-            error(function(data, status) {
-                $scope.data = data || "Request failed";
-                $scope.status = status;
-            });
+        var x = window.confirm("You may choose to mark this survey inactive if you only wish to hide it from users. Are you sure want to permanantly delete this survey? ");
+        if(x){
+            $http.post("./php/SurveyController.php", { "criteria":"DeleteSurvey","data" : survey.idSurveyID}).
+                success(function(data, status) {
+                    $scope.status = status;
+                    if(data=="1"){
+                        $scope.$root.ErrorMessage = "Survey Deleted";
+                        window.location.href = '#/admin-surveys';
+                    }else{
+                        $scope.$root.ErrorMessage =  "Could not delete survey";
+                    }
+                })
+                .
+                error(function(data, status) {
+                    $scope.data = data || "Request failed";
+                    $scope.status = status;
+                });
+        }
+
+
     }
 
 }
