@@ -19,6 +19,7 @@ function AdminResultsCtrl($scope,$routeParams,$http){
 
     $scope.DownloadPDF = function(){
         var fileString = document.documentElement.outerHTML;
+        console.log(fileString);
         var fileName = "C"+$scope.$root.LoggedInUser.idCompanyID+"S"+TheSurveyID+"_Results.pdf"
         $http.post("./php/PDFController.php",{"fileString":fileString,"fileName":fileName}).
             success(function(data,status){

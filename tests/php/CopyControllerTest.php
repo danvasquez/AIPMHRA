@@ -32,6 +32,7 @@ class CopyControllerTest extends PHPUnit_Framework_TestCase{
 	}
 
 	public function testCopyTheSurvey(){
+		$this->markTestSkipped();
 		$a = new CopyController(12,23);
 
 		$b = $a->CopyTheSurvey();
