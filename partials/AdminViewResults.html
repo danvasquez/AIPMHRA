@@ -46,8 +46,8 @@
                     Text
                 </div>
             </div>
-            <div class="span5 white">
-                <img ng-src="img/statGraphs/{{question.idQuestionID}}.png"/>
+            <div class="span5 white" ng-show="question.sQuestionType!='Textbox'">
+                <img ng-src="http://ha.healthylife.com/img/statGraphs/{{question.idQuestionID}}.png"/>
                 <!--<div style="width: 95%" ng-show="question.sQuestionType!='Textbox'" ng-model="question.resultsStats"-->
                      <!--qn:columns="[{type:'string', name: 'Answer'},{type:'number', name: 'Responses'}]"-->
                      <!--qn:piechart="{-->
