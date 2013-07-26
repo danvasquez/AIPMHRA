@@ -147,8 +147,13 @@
    /* Render the picture to a file */
    function render($FileName)
     {
-     if ( $this->TransparentBackground ) { imagealphablending($this->Picture,false); imagesavealpha($this->Picture,true); }
+     if ( $this->TransparentBackground ) {
+	     imagealphablending($this->Picture,false);
+	     imagesavealpha($this->Picture,true);
+     }
+
      imagepng($this->Picture,$FileName);
+
     }
 
    /* Render the picture to a web browser stream */

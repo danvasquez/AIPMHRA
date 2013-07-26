@@ -35,7 +35,24 @@ class ResultsCollection
         //get the number of users available (by company);
         $this->usersAvailable = new UserCollection();
         $this->usersAvailable->GetByCompanyID($this->survey->iCompany);
+
+	    //populate the chart images
+	    $this->generateChartImages();
     }
+
+	public function generateChartImages(){
+
+		foreach($this->survey->qcQuestions as $question){
+			try{
+				ob_start();
+				$x = new pCharter($question);
+				ob_end_flush();
+			}catch(Exception $e){
+
+			}
+		}
+
+	}
 
     public function GetAttemptedUsers(){
         $query = "SELECT user from userdata where survey=:surveyID group by user order by user ASC ";
