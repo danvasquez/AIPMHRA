@@ -19,10 +19,20 @@
 		function __construct(Question $question){
 			$this->pChart = new pData();
 
-			$this->pChart->addPoints(array(10,22),"Responses");
+			$questionData = [];
+			$questionLabels=[];
+
+			$counter="A";
+			foreach($question->aAnswers as $ans){
+				array_push($questionData,$ans->iUsersAnswered);
+				array_push($questionLabels,$counter);
+				$counter++;
+			}
+
+			$this->pChart->addPoints($questionData,"Responses");
 			$this->pChart->setSerieTicks("Responses",5);
 			$this->pChart->setAxisName(0,"# Responses");
-			$this->pChart->addPoints(array("Male","Female"),"Labels");
+			$this->pChart->addPoints($questionLabels,"Labels");
 			$this->pChart->setSerieDescription("# Responses","Questions");
 			$this->pChart->setAbscissa("Labels");
 

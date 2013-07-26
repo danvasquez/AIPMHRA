@@ -230,11 +230,15 @@ function RegisterCtrl($scope,$routeParams,$http,$cookies){
                                         if(data == '0'){
                                             $scope.$root.ErrorMessage = "Problem: Could not save user";
                                         }else if(data>"0"){
-                                            $scope.user.idUserID = data;
-                                            $scope.$root.ErrorMessage = "User Saved";
-                                            $cookies.LoggedInUserID = data;
                                             $scope.$root.FillUserData(data);
-                                            window.location.href="#/home";
+                                            $cookies.LoggedInUserID = data;
+                                            $scope.ErrorMessage = "Welcome";
+
+//                                            $scope.user.idUserID = data;
+//                                            $scope.$root.ErrorMessage = "User Saved";
+//                                            $cookies.LoggedInUserID = data;
+//                                            $scope.$root.FillUserData(data);
+//                                            window.location.href="#/home";
                                         }else{
                                             $scope.user.idUserID = data;
                                             $scope.$root.ErrorMessage = "User Could Not Be Saved";
