@@ -19,12 +19,12 @@
 		function __construct(Question $question){
 			$this->pChart = new pData();
 
-			$this->pChart->addPoints(array(150,220,300,-250,-420,-200,300,200,100),"Server A");
-			$this->pChart->addPoints(array(140,0,340,-300,-320,-300,200,100,50),"Server B");
-			$this->pChart->setAxisName(0,"Hits");
-			$this->pChart->addPoints(array("January","February","March","April","May","Juin","July","August","September"),"Months");
-			$this->pChart->setSerieDescription("Months","Month");
-			$this->pChart->setAbscissa("Months");
+			$this->pChart->addPoints(array(10,22),"Responses");
+			$this->pChart->setSerieTicks("Responses",5);
+			$this->pChart->setAxisName(0,"# Responses");
+			$this->pChart->addPoints(array("Male","Female"),"Labels");
+			$this->pChart->setSerieDescription("# Responses","Questions");
+			$this->pChart->setAbscissa("Labels");
 
 			/* Create the pChart object */
 			$myPicture = new pImage(700,230,$this->pChart);
