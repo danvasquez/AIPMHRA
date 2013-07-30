@@ -19,14 +19,14 @@
             </div>
         </div>
 
-        <div class="row well well-small" ng-repeat="question in results.survey.qcQuestions">
+        <div class="row well well-small" style="page-break-after: always;" ng-repeat="question in results.survey.qcQuestions">
             <div class="row">
                 <div class="span10 ResultsQuestionText">{{question.sText}}</div>
             </div>
-        <div class="row">
-            <div class="span5 white">
+        <div class="row ">
+            <div class="span10 text-center white">
                 <div ng-show="question.sQuestionType!='Textbox'">
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="max-width: 80%;margin-left:auto;margin-right:auto;">
 
                         <thead>
                             <tr>
@@ -36,7 +36,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="answer in question.aAnswers">
-                                <td>{{answer.sAnswerText}}</td>
+                                <td style="width:75%">{{answer.sAnswerText}}</td>
                                 <td>{{answer.iUsersAnswered}}</td>
                             </tr>
                         </tbody>
@@ -46,8 +46,11 @@
                     Text
                 </div>
             </div>
-            <div class="span5 white" ng-show="question.sQuestionType!='Textbox'">
-                <img ng-src="http://ha.healthylife.com/img/statGraphs/{{question.idQuestionID}}.png"/>
+        </div>
+        <div class="row">
+            <div class="span10 white text-center" ng-show="question.sQuestionType!='Textbox'">
+                <img style="max-width: 100%;" ng-src="http://ha.healthylife.com/img/statGraphs/{{question.idQuestionID}}.png"/>
+
                 <!--<div style="width: 95%" ng-show="question.sQuestionType!='Textbox'" ng-model="question.resultsStats"-->
                      <!--qn:columns="[{type:'string', name: 'Answer'},{type:'number', name: 'Responses'}]"-->
                      <!--qn:piechart="{-->

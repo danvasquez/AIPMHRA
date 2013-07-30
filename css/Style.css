@@ -357,6 +357,10 @@ th{
     background-color: #ffffff!important;
 }
 
+.resultQuestion{
+    page-break-before: always;
+}
+
 @media print {
     .navbar,.Sidebar,.footer,.languageOption,iframe,#loading{
         display: none !important;
@@ -368,4 +372,11 @@ th{
         background-color: #ffffff;
     }
 
+    img{
+        max-width: 100%;
+    }
+
+    .resultQuestion{
+        page-break-before: always;
+    }
 }

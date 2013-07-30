@@ -53,7 +53,7 @@
 
    /* Font properties */
    var $FontName	= "/var/www/ha/AIPMHRA/php/classes/fonts/GeosansLight.ttf";	// Default font file
-   var $FontSize	= 12;				// Default font size
+   var $FontSize	= 14;				// Default font size
    var $FontBox		= NULL;				// Return the bounding box of the last written string
    var $FontColorR	= 0;				// Default color settings
    var $FontColorG	= 0;				// Default color settings

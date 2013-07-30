@@ -46,7 +46,7 @@
 			$myPicture->drawRectangle(0,0,699,229,array("R"=>0,"G"=>0,"B"=>0));
 
 			/* Set the default font */
-			$myPicture->setFontProperties(array("FontName"=>"/var/www/ha/AIPMHRA/php/classes/fonts/pf_arma_five.ttf","FontSize"=>6));
+			$myPicture->setFontProperties(array("FontName"=>"/var/www/ha/AIPMHRA/php/classes/fonts/pf_arma_five.ttf","FontSize"=>10));
 
 			/* Define the chart area */
 			$myPicture->setGraphArea(60,40,650,200);
